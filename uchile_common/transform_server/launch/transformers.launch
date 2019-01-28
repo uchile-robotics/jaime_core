@@ -1,0 +1,5 @@
+<launch>
+
+	<node name="simple_pose_transformer" type="simple_pose_transformer" pkg="transform_server" output="screen" ns="/inka/tf/"/>
+
+</launch>
