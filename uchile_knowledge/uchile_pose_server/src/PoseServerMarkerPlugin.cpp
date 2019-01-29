@@ -28,6 +28,9 @@
 #include <uchile_srvs/SemMap.h>
 #include <uchile_srvs/String.h>
 
+//Namespace
+std::string ns;
+
 typedef std::vector<uchile_msgs::SemanticObject> SemanticObjectArray;
 
 /*
@@ -236,11 +239,11 @@ public:
 		ros::NodeHandle priv("~");
 
 		// -- prepare clients --
-		_which_map_client = priv.serviceClient<uchile_srvs::String>("/bender/knowledge/pose_server/which");
-		_set_client = priv.serviceClient<uchile_srvs::SemMap>("/bender/knowledge/pose_server/set");
-		_get_all_client = priv.serviceClient<uchile_srvs::SemMap>("/bender/knowledge/pose_server/get_all");
-		_get_client = priv.serviceClient<uchile_srvs::SemMap>("/bender/knowledge/pose_server/get");
-		_save_client = priv.serviceClient<uchile_srvs::String>("/bender/knowledge/pose_server/save");
+		_which_map_client = priv.serviceClient<uchile_srvs::String>(ns+"pose_server/which");
+		_set_client = priv.serviceClient<uchile_srvs::SemMap>(ns+"pose_server/set");
+		_get_all_client = priv.serviceClient<uchile_srvs::SemMap>(ns+"pose_server/get_all");
+		_get_client = priv.serviceClient<uchile_srvs::SemMap>(ns+"pose_server/get");
+		_save_client = priv.serviceClient<uchile_srvs::String>(ns+"pose_server/save");
 
 		ROS_INFO("Waiting for services");
 		while ( ros::ok() && !_which_map_client.waitForExistence(ros::Duration(3.0)) );
@@ -604,6 +607,13 @@ int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "pose_server_marker_plugin");
 
+	if (argc <2)
+	{
+		ns = "knowledge";
+		ROS_WARN("No namespace specified, using default %s",ns.c_str());
+	}
+	else ns = argv[1];
+	ROS_INFO("namespace: %s",ns.c_str());
 	boost::scoped_ptr<uchile_nav::PoseServerMarkerPlugin> node(
 		new uchile_nav::PoseServerMarkerPlugin()
 	);

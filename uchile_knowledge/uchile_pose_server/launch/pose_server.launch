@@ -8,6 +8,6 @@
 	</node>
 
 	<!-- Pose Server Marker Plugin -->
-	<node pkg="uchile_pose_server" type="pose_server_marker_plugin" name="pose_server_marker_plugin" respawn="true" ns="/inka/knowledge/" output="screen"/>
+	<node pkg="uchile_pose_server" type="pose_server_marker_plugin" name="pose_server_marker_plugin" respawn="true" ns="/inka/knowledge/" args="/inka/knowledge/" output="screen"/>
 
 </launch>
