@@ -1,0 +1,18 @@
+<launch>
+
+    <arg name="ns" default="joy"/>
+
+    <!-- base -->
+    <include file="$(find jaime_joy)/launch/includes/velocity_smoother.launch.xml">
+    <arg name="ns" value="$(arg ns)"/>
+    </include>
+
+    <node pkg="jaime_joy" type="joy_base.py" name="joy_base" output="screen">
+        <rosparam file="$(find jaime_joy)/config/joystick_base.yaml" command="load"/>
+        <remap from="cmd_vel" to="joy_velocity_smoother/raw_cmd_vel"/>
+        <remap from="base/master_cmd_vel" to="$(arg ns)/base/master_cmd_vel"/>
+        <remap from="joy" to="$(arg ns)/joy"/>
+    </node>
+
+
+</launch>

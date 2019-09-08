@@ -1,0 +1,16 @@
+<launch>
+
+    <!-- parameters -->
+    <arg name="ns" default="/jaime/joy"/>
+
+    <!-- drivers -->
+    <include file="$(find jaime_joy)/launch/common/driver.xml">
+        <arg name="ns" value="$(arg ns)"/>
+    </include>
+
+    <!-- joy interfaces -->
+    <include file="$(find jaime_joy)/launch/common/joy_interface.xml">
+        <arg name="ns" value="$(arg ns)"/>
+    </include>
+    
+</launch>
