@@ -14,21 +14,21 @@
 subscribers:
 
   - name: "Default Commands"
-    topic: "/inka/nav/cmd_vel"
+    topic: "/jaime/nav/cmd_vel"
     timeout: 0.1
     priority: 0
     short_desc: "The default cmd_vel input topic, controllers unaware that we are multiplexing cmd_vel should come here"
 
   - name: "ROS Navigation Stack"
-    topic: "/inka/nav/move_base/cmd_vel"
+    topic: "/jaime/nav/move_base/cmd_vel"
     timeout: 0.5
     priority: 1
     short_desc: "ROS Navigation Stack controller. Commands from move_base."
 
   - name: "Default Joystick (Low Priority)"
-    topic: "/inka/joy/base/cmd_vel"
+    topic: "/jaime/joy/base/cmd_vel"
     timeout: 5
     priority: 2
     short_desc: "User controlled commands. It has lower priority than the safety layer. Joysticks should use this topic by default."
 
-publisher: "/inka/nav/mux/cmd_vel"
+publisher: "/jaime/nav/mux/cmd_vel"

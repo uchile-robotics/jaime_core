@@ -6,7 +6,7 @@
 	<arg name="debug" value="false"/>
 
 	<!-- Map Analyzer -->
-	<node pkg="uchile_maps" type="map_analyzer" name="map_analyzer" ns="/inka/knowledge/">
+	<node pkg="uchile_maps" type="map_analyzer" name="map_analyzer" ns="/jaime/knowledge/">
 		<param name="tf_map_frame" value="/map"/>
 		<param name="debug"        value="$(arg debug)"/>
 		<rosparam file="$(find uchile_maps)/maps/$(arg map_name).yaml" command="load"/>
