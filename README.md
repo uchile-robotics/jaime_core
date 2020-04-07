@@ -14,6 +14,7 @@ cd forks_ws
 wstool init src
 wstool merge -t src https://raw.githubusercontent.com/uchile-robotics/jaime_core/master/forks.rosinstall
 wstool update -t src
+rosdep install --from-paths . --ignore-src --rosdistro=melodic -y -r
 ```
 
 ### Install base:
@@ -24,5 +25,6 @@ cd base_ws
 wstool init src
 wstool merge -t src https://raw.githubusercontent.com/uchile-robotics/jaime_core/master/jaime.rosinstall
 wstool update -t src
+rosdep install --from-paths . --ignore-src --rosdistro=melodic -y -r
 ```
 
