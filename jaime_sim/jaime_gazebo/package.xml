@@ -70,6 +70,7 @@
     <depend>trajectory_msgs</depend>
     <depend>urdf</depend>
     <depend>xacro</depend>
+    <depend>pointcloud_to_laserscan</depend>
 
 
     <!-- build dependencies -->
