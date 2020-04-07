@@ -48,7 +48,6 @@ catkin_package(
     realtime_tools
     trajectory_msgs
     urdf
-  INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
 )
 
@@ -57,7 +56,6 @@ catkin_package(
 ###########
 
 include_directories(
-  include
   ${Boost_INCLUDE_DIR}
   ${catkin_INCLUDE_DIRS}
 )
