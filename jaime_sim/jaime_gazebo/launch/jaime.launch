@@ -12,7 +12,7 @@
   <arg name="worldname" default="empty" />
 
   <!-- jaime model type -->
-  <arg name="model_type" default="kobuki_standalone" />
+  <arg name="model_type" default="asus_gazebo" />
 
 
   <!-- - - - - - - -  USEFUL Parameters - - - - - - - -->
@@ -24,8 +24,6 @@
   <!-- ros_control doesnt support! @TODO -->
   <arg name="prefix" default="jaime/" />
 
-  <!-- - - - - - - -  NODES - - - - - - - -->
-  <!-- remap laser scans that need further processing by the laser pipeline -->
 
   <!-- Use simulation time -->
   <param name="use_sim_time" value="$(arg use_sim_time)" />
@@ -37,12 +35,6 @@
     <arg name="gui" value="$(arg gui)"/>
   </include>
   
-  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model jaime_model -param robot_description">
-  </node>
-
-  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
-
 
 
   
