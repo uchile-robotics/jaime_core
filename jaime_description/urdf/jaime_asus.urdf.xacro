@@ -260,7 +260,7 @@
         </geometry>
       </collision-->
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
         <geometry>
           <!--box size="${camara} ${camara} ${camara}"/-->
           <mesh filename="package://jaime_description/meshes/camera_ASUS_XTION.STL"/>
