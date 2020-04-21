@@ -4,7 +4,7 @@
     <!-- PACKAGE INFORMATION -->
     <!-- - - - - - - - - - - -->
 
-    <name>bender_sim</name>
+    <name>jaime_sim</name>
     <version>0.0.1</version>
 
     <description>Manages simulation environments for Bender</description>
