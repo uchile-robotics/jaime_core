@@ -8,7 +8,7 @@
     <remap from="joy_velocity_smoother/smooth_cmd_vel" to="$(arg ns)/base/cmd_vel"/>
 
     <!-- Robot velocity feedbacks; use the default base configuration -->
-    <remap from="navigation_velocity_smoother/odometry" to="odom"/>
-    <remap from="navigation_velocity_smoother/robot_cmd_vel" to="mobile_base/commands/velocity"/>
+    <remap from="navigation_velocity_smoother/odometry" to="/jaime/odom"/>
+    <remap from="navigation_velocity_smoother/robot_cmd_vel" to="/jaime/mobile_base/commands/velocity"/>
   </node>
 </launch>
