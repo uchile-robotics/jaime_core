@@ -12,3 +12,4 @@
 # rate at which messages are sent. This option can also be used to limit the rate of outgoing messages.
 # Button events are always sent out immediately to avoid missing button presses.
 deadzone: 0.2
+autorepeat_rate: 50.0
