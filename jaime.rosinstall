@@ -1,3 +1,5 @@
 - git: {local-name: jaime_core, version: master, uri: 'https://github.com/uchile-robotics/jaime_core'}
 - git: {local-name: uchile_knowledge, version: jaime, uri: 'https://github.com/uchile-robotics/uchile_knowledge'}
 - git: {local-name: uchile_common, version: jaime, uri: 'https://github.com/uchile-robotics/uchile_common'}
+- git: {local-name: uchile_tools, version: feat-jaime, uri: 'https://github.com/uchile-robotics/uchile_tools'}
+- git: {local-name: jaime_bringup, version: master, uri: 'https://github.com/uchile-robotics/jaime_bringup'}
