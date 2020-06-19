@@ -24,7 +24,7 @@
 
 int oldpos = 90;
 int pos = 90;
-int newpos;
+int newpos = 90;
 
 ros::NodeHandle  nh;
 
@@ -33,20 +33,7 @@ Servo servo;
 void servo_cb( const std_msgs::Int16 & cmd_msg) {
   newpos = cmd_msg.data;
 
-  for (pos = oldpos; pos <= newpos; pos += 1) {
 
-    servo.write(pos);
-    delay(15);
-  }
-
-  oldpos = pos;
-
-  for (pos = oldpos; pos >= newpos ; pos -= 1) {
-    servo.write(pos);
-    delay(15);
-  }
-
-  oldpos = pos;
 
   //servo.write(cmd_msg.data); //set servo angle, should be from 0-180
   digitalWrite(13, HIGH - digitalRead(13)); //toggle led
@@ -65,10 +52,28 @@ void setup() {
   nh.subscribe(sub);
 
   servo.attach(9); //attach it to pin 9
+
+
   servo.write(90); //default position
 }
 
 void loop() {
   nh.spinOnce();
-  delay(1);
+  if (pos < newpos) {
+    pos += 1;
+    if (pos > 180) {
+      pos == 180;
+    }
+    servo.write(pos);
+  }
+
+  if (pos > newpos) {
+    pos -= 1;
+    if (pos < 0) {
+      pos == 0;
+    }
+    servo.write(pos);
+  }
+
+  delay(15);
 }
