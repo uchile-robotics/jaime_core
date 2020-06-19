@@ -3,10 +3,12 @@
 __author__ = 'Matias Pavez'
 __email__ = 'matias.pavez.b@gmail.com'
 
+import time
 import rospy
 from std_srvs.srv import Empty
 from sensor_msgs.msg import Joy
 from geometry_msgs.msg import Twist
+from std_msgs.msg import Int16
 from jaime_joy import xbox
 
 
@@ -18,14 +20,21 @@ class JoystickBase(object):
         self.pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
         self.pub_priority = rospy.Publisher('base/master_cmd_vel', Twist, queue_size=1)
         self.cancel_goal_client = rospy.ServiceProxy('/jaime/nav/goal_server/cancel', Empty)
+        self.pub_neck = rospy.Publisher('servo', Int16, queue_size=1)
 
         # control
         self.is_paused = False
+        self.neck_pos  = 0
+        self.ltime = 0
 
         # load configuration
         self.b_pause    = rospy.get_param('~b_pause', 'START')
         self.b_cancel   = rospy.get_param('~b_cancel', 'B')
         self.b_priority = rospy.get_param('~b_priority', 'LB')
+        self.b_neck_up   = rospy.get_param('~b_neck_up', 'UP')
+        self.b_neck_down = rospy.get_param('~b_neck_down', 'DOWN')
+        self.b_neck_reset = rospy.get_param('~b_neck_reset', 'RIGHT')
+        self.max_neck_vel = rospy.get_param('~max_neck_vel', 2)
         a_linear   = rospy.get_param('~a_linear', 'LS_VERT')
         a_angular  = rospy.get_param('~a_angular', 'LS_HORZ')
         self.max_linear_vel  = rospy.get_param('~max_linear_vel', 0.5)
@@ -35,6 +44,9 @@ class JoystickBase(object):
         self.b_idx_pause    = key_mapper.get_button_id(self.b_pause)
         self.b_idx_cancel   = key_mapper.get_button_id(self.b_cancel)
         self.b_idx_priority = key_mapper.get_button_id(self.b_priority)
+        self.b_idx_neck_up    = key_mapper.get_button_id(self.b_neck_up)
+        self.b_idx_neck_down  = key_mapper.get_button_id(self.b_neck_down)
+        self.b_idx_neck_reset = key_mapper.get_button_id(self.b_neck_reset)
         self.a_idx_linear   = key_mapper.get_axis_id(a_linear)
         self.a_idx_angular  = key_mapper.get_axis_id(a_angular)
 
@@ -63,6 +75,11 @@ class JoystickBase(object):
             rospy.loginfo("There is no goal to cancel")
         except Exception:
             pass
+
+    def move_neck(self):
+        cmd = Int16()
+        cmd.data = int(self.neck_pos)
+        self.pub_neck.publish(cmd)
 
     def callback(self, msg):
 
@@ -101,6 +118,17 @@ class JoystickBase(object):
             else:
                 self.pub.publish(cmd)
 
+            dt = time.time() - self.ltime
+            if msg.buttons[self.b_idx_neck_up]:
+                self.neck_pos += min(self.max_neck_vel * dt, self.max_neck_vel)
+                self.move_neck()
+            elif msg.buttons[self.b_idx_neck_down]:
+                self.neck_pos -= min(self.max_neck_vel * dt, self.max_neck_vel)
+                self.move_neck()
+            elif msg.buttons[self.b_idx_neck_reset]:
+                self.neck_pos = 0
+                self.move_neck()
+            self.ltime = time.time()
 
 if __name__ == '__main__':
     rospy.init_node('joy_base')
