@@ -1,0 +1,5 @@
+# port: Name of port to use. 
+port: /dev/ttyUSB0
+# baud: Baud rate, in bps. 
+baud: 115200
+
