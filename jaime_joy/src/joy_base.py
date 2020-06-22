@@ -4,6 +4,7 @@ __author__ = 'Matias Pavez'
 __email__ = 'matias.pavez.b@gmail.com'
 
 import time
+import numpy as np
 import rospy
 from std_srvs.srv import Empty
 from sensor_msgs.msg import Joy
@@ -24,7 +25,6 @@ class JoystickBase(object):
 
         # control
         self.is_paused = False
-        self.neck_pos  = 0
         self.ltime = 0
 
         # load configuration
@@ -35,6 +35,9 @@ class JoystickBase(object):
         self.b_neck_down = rospy.get_param('~b_neck_down', 'DOWN')
         self.b_neck_reset = rospy.get_param('~b_neck_reset', 'RIGHT')
         self.max_neck_vel = rospy.get_param('~max_neck_vel', 2)
+        self.max_neck_ang = rospy.get_param('~max_neck_ang', 180.0)
+        self.min_neck_ang = rospy.get_param('~min_neck_ang', 0.0)
+        self.neck_center_ang = rospy.get_param('~neck_center_ang', 90.0)
         a_linear   = rospy.get_param('~a_linear', 'LS_VERT')
         a_angular  = rospy.get_param('~a_angular', 'LS_HORZ')
         self.max_linear_vel  = rospy.get_param('~max_linear_vel', 0.5)
@@ -49,6 +52,9 @@ class JoystickBase(object):
         self.b_idx_neck_reset = key_mapper.get_button_id(self.b_neck_reset)
         self.a_idx_linear   = key_mapper.get_axis_id(a_linear)
         self.a_idx_angular  = key_mapper.get_axis_id(a_angular)
+
+        # Set neck pos
+        self.neck_pos  = self.neck_center_ang
 
         # check
         self.assert_params()
@@ -77,6 +83,7 @@ class JoystickBase(object):
             pass
 
     def move_neck(self):
+        self.neck_pos = np.clip(self.neck_pos, self.min_neck_ang, self.max_neck_ang)
         cmd = Int16()
         cmd.data = int(self.neck_pos)
         self.pub_neck.publish(cmd)
@@ -126,7 +133,7 @@ class JoystickBase(object):
                 self.neck_pos -= min(self.max_neck_vel * dt, self.max_neck_vel)
                 self.move_neck()
             elif msg.buttons[self.b_idx_neck_reset]:
-                self.neck_pos = 0
+                self.neck_pos = self.neck_center_ang
                 self.move_neck()
             self.ltime = time.time()
 

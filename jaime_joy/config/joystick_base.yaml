@@ -26,5 +26,14 @@ a_linear:  'LS_VERT'
 max_linear_vel: 0.5   # caution: do not use values higher than 0.7 
 max_angular_vel: 0.6  # caution: do not use values higher than 0.8
 
-# neck angular velocity
+# neck angular velocity in deg/sec
 max_neck_vel: 2
+
+# neck maximum angle in sexagesimal degrees
+max_neck_ang: 180
+
+# neck minimum angle in sexagesimal degrees
+min_neck_ang: 0
+
+# neck center angle position in sexagesimal degrees
+neck_center_ang: 90
