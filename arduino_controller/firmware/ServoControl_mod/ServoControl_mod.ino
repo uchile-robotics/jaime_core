@@ -26,7 +26,7 @@ int oldpos = 90;
 int pos = 90;
 int newpos = 90;
 unsigned long previousMillis = 0;
-const long interval = 8;   
+const long interval = 8;//delay for servo 'step'  
 ros::NodeHandle  nh;
 
 Servo servo;
