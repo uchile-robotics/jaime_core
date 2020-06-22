@@ -25,7 +25,8 @@
 int oldpos = 90;
 int pos = 90;
 int newpos = 90;
-
+unsigned long previousMillis = 0;
+const long interval = 8;   
 ros::NodeHandle  nh;
 
 Servo servo;
@@ -59,6 +60,10 @@ void setup() {
 
 void loop() {
   nh.spinOnce();
+   unsigned long currentMillis = millis();
+     if (currentMillis - previousMillis >= interval) {
+      
+         previousMillis = currentMillis;
   if (pos < newpos) {
     pos += 1;
     if (pos > 180) {
@@ -75,5 +80,6 @@ void loop() {
     servo.write(pos);
   }
 
-  delay(15);
+     }
+     //delay(1);
 }
