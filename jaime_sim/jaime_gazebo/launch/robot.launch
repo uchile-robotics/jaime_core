@@ -14,11 +14,6 @@
     <node pkg="robot_state_publisher" type="state_publisher" 
           name="robot_state_publisher" output="screen"/>
 
-    <node pkg="tf"
-        type="static_transform_publisher"
-        name="odom_to_map"
-        args="$(arg init_pose_x) $(arg init_pose_y) 0 0 0 0 map $(arg robot_name)_tf/odom 100" />
-
     <!-- The odometry estimator, throttling, fake laser etc. go here -->
     <!-- All the stuff as from usual robot launch file -->
 
