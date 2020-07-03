@@ -1,5 +1,5 @@
 <launch>
-  <arg name="ns" default="jaime"/>
+  <arg name="ns" default="jaime/arduino"/>
   <node pkg="rosserial_python" type="serial_node.py" name="serial_node" ns="$(arg ns)">
   <rosparam file="$(find arduino_controller)/config/rosserial.yaml" command="load"/>
   </node>
