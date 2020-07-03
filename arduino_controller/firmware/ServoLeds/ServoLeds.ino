@@ -58,13 +58,12 @@ void led_alert_cb( const std_msgs::Bool & cmd_msg) {
   digitalWrite(LED_ALERT, cmd_msg.data); //set led
 }
 void bat_per_cb( const std_msgs::UInt8 & cmd_msg) {
-  int r1 = 4 * (int)cmd_msg.data;
-  float index = (float)r1 / 100.0;
+  float index = (float)cmd_msg.data / 25.0;
   int bi = round(index); // [0,4]
   for (int i = 0; i<bi; i++){
     digitalWrite(led_bat[i], HIGH);
   }
-  for (int i = bi; i<4; i--){
+  for (int i = bi; i<4; i++){
     digitalWrite(led_bat[i], LOW);
   }
 }
