@@ -6,18 +6,22 @@ from kobuki_msgs.msg import SensorState
 from std_msgs.msg import UInt8
 
 class kobuki_battery():
-	kobuki_base_max_charge = 160
+
 
 	def __init__(self):
-		rospy.init_node('kobuki_battery')       
+		rospy.init_node('kobuki_battery')
+		self.Vmax    = rospy.get_param('~kobuki_base_max_charge', 165)
+		self.Vmin    = rospy.get_param('~kobuki_base_min_charge', 130)   
+		self.conv_factor = 100.0/(self.Vmax - self.Vmin)    
 		rospy.Subscriber('/jaime/mobile_base/sensors/core', SensorState, self.BatteryCallback)
+		self.pub = rospy.Publisher('/jaime/battery_percent', UInt8, queue_size = 10)
 
 		rospy.spin()
 
 	def BatteryCallback(self, data):
-		battery_percent = round(float(data.battery) / float(self.kobuki_base_max_charge) * 100)
-		pub = rospy.Publisher('/jaime/battery_percent', UInt8, queue_size = 10)
-		pub.publish(battery_percent)
+		battery_percent = round(float(data.battery-self.Vmin) * self.conv_factor )
+		print(battery_percent)
+		self.pub.publish(battery_percent)
 		rospy.loginfo(str(battery_percent))
 		return
 
