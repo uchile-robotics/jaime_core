@@ -4,6 +4,7 @@ import roslib
 import rospy
 from kobuki_msgs.msg import SensorState, Sound
 from std_msgs.msg import UInt8,Bool
+from std_srvs.srv import Trigger, TriggerResponse
 
 class kobuki_status():
 
@@ -22,6 +23,9 @@ class kobuki_status():
 		self.sound_pub = rospy.Publisher('/jaime/mobile_base/commands/sound', Sound, queue_size = 10)
 		rospy.sleep(1)
 		self.ledon_pub.publish(True)
+		# shutdown service proxy
+		rospy.wait_for_service('shutdown_service')
+		self.shutdown = rospy.ServiceProxy('shutdown_service', Trigger)
 		rospy.spin()
 
 	def BatteryCallback(self, data):
@@ -30,12 +34,15 @@ class kobuki_status():
 		# 30% Threshold
 		if battery_percent<=30 and self.lBat>30:
 			self.sound_pub.publish(4)
+		# 10% Threshold
+		elif battery_percent<=10 and self.lBat>10:
+			self.shutdown()
 		self.lBat = battery_percent
 		return
 
 if __name__ == '__main__':
-	try:
-		kobuki_status()
-	except:
-		rospy.logwarn('Cannot run status')
+	#try:
+	kobuki_status()
+	#except:
+	#	rospy.logwarn('Cannot run status')
 
