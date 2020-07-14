@@ -1,0 +1,5 @@
+<launch>
+  <arg name="ns" default="/jaime"/>
+  <node pkg="robot_status" type="status.py" name="status" ns="$(arg ns)">
+  </node>
+</launch>
