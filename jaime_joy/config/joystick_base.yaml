@@ -7,7 +7,7 @@ b_pause: 'START'
 b_cancel: 'B'
 
 # high priority joystick button
-b_priority: 'LB'
+b_priority: 'BACK'
 
 # move neck up button
 b_neck_up: 'UP'
