@@ -28,6 +28,8 @@
 #define LED_ON    2
 #define LED_ALERT 3
 int led_bat[4] = {4, 5, 6, 7};
+#define LED_SAFETY 8
+#define LED_TELEOP 10
 //SERVO
 #define SERVO_PIN 9
 
@@ -57,6 +59,12 @@ void led_on_cb( const std_msgs::Bool & cmd_msg) {
 void led_alert_cb( const std_msgs::Bool & cmd_msg) {
   digitalWrite(LED_ALERT, cmd_msg.data); //set led
 }
+void led_safety_cb( const std_msgs::Bool & cmd_msg) {
+  digitalWrite(LED_SAFETY, cmd_msg.data); //set led
+}
+void led_teleop_cb( const std_msgs::Bool & cmd_msg) {
+  digitalWrite(LED_TELEOP, cmd_msg.data); //set led
+}
 void bat_per_cb( const std_msgs::UInt8 & cmd_msg) {
   float index = (float)cmd_msg.data / 25.0;
   int bi = round(index); // [0,4]
@@ -71,6 +79,8 @@ void bat_per_cb( const std_msgs::UInt8 & cmd_msg) {
 ros::Subscriber<std_msgs::Int16> sub("servo", servo_cb);
 ros::Subscriber<std_msgs::Bool> sub_lo("led/on", led_on_cb);
 ros::Subscriber<std_msgs::Bool> sub_le("led/alert", led_alert_cb);
+ros::Subscriber<std_msgs::Bool> sub_ls("led/safety", led_safety_cb);
+ros::Subscriber<std_msgs::Bool> sub_lt("led/teleop", led_teleop_cb);
 ros::Subscriber<std_msgs::UInt8> sub_batt("batt_per", bat_per_cb);
 
 void setup() {
@@ -78,6 +88,8 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(LED_ON, OUTPUT);
   pinMode(LED_ALERT, OUTPUT);
+  pinMode(LED_SAFETY, OUTPUT);
+  pinMode(LED_TELEOP, OUTPUT);
   for (int i = 0; i<4; i++){
     pinMode(led_bat[i], OUTPUT);
   }
@@ -88,6 +100,8 @@ void setup() {
   nh.subscribe(sub);
   nh.subscribe(sub_lo);
   nh.subscribe(sub_le);
+  nh.subscribe(sub_ls);
+  nh.subscribe(sub_lt);
   nh.subscribe(sub_batt);
 
   servo.attach(SERVO_PIN); //attach it to pin 9
