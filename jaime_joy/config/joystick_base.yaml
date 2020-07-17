@@ -7,7 +7,7 @@ b_pause: 'START'
 b_cancel: 'B'
 
 # high priority joystick button
-b_priority: 'LB'
+b_priority: 'BACK'
 
 # movement axes
 a_angular: 'LS_HORZ'
