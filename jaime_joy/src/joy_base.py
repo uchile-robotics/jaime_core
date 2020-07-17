@@ -8,6 +8,7 @@ from std_srvs.srv import Empty
 from sensor_msgs.msg import Joy
 from geometry_msgs.msg import Twist
 from jaime_joy import xbox
+from std_msgs.msg import Bool
 
 
 class JoystickBase(object):
@@ -18,19 +19,23 @@ class JoystickBase(object):
         self.pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
         self.pub_priority = rospy.Publisher('base/master_cmd_vel', Twist, queue_size=1)
         self.cancel_goal_client = rospy.ServiceProxy('/jaime/nav/goal_server/cancel', Empty)
+        self.ledon_pub_safety = rospy.Publisher('/jaime/arduino/led/safety',Bool,queue_size=2,latch=True)        
+        self.ledon_pub_teleop = rospy.Publisher('/jaime/arduino/led/teleop',Bool,queue_size=2,latch=True)
+        
 
         # control
         self.is_paused = False
+        self.safety_layer = True
 
         # load configuration
         self.b_pause    = rospy.get_param('~b_pause', 'START')
         self.b_cancel   = rospy.get_param('~b_cancel', 'B')
-        self.b_priority = rospy.get_param('~b_priority', 'LB')
+        self.b_priority = rospy.get_param('~b_priority', 'BACK')
         a_linear   = rospy.get_param('~a_linear', 'LS_VERT')
         a_angular  = rospy.get_param('~a_angular', 'LS_HORZ')
         self.max_linear_vel  = rospy.get_param('~max_linear_vel', 0.5)
         self.max_angular_vel = rospy.get_param('~max_angular_vel', 0.5)
-
+        
         key_mapper = xbox.KeyMapper()
         self.b_idx_pause    = key_mapper.get_button_id(self.b_pause)
         self.b_idx_cancel   = key_mapper.get_button_id(self.b_cancel)
@@ -43,8 +48,11 @@ class JoystickBase(object):
 
         # ready to work
         rospy.Subscriber('joy', Joy, self.callback, queue_size=1)
+        rospy.sleep(0.1)
+        self.ledon_pub_safety.publish(self.safety_layer)
+        self.ledon_pub_teleop.publish(not self.is_paused)
         rospy.loginfo('Joystick for base is ready')
-
+        
     def assert_params(self):
         """
         checks whether the user parameters are valid or no.
@@ -65,6 +73,17 @@ class JoystickBase(object):
             pass
 
     def callback(self, msg):
+
+        # Safety Layer
+        if msg.buttons[self.b_idx_priority]:
+            self.safety_layer = not self.safety_layer
+            self.ledon_pub_safety.publish(self.safety_layer)
+            if self.safety_layer:
+                rospy.logwarn("\n Safety layer activated!, press the " + self.b_priority + " button to resume it\n")
+            else:
+                rospy.logwarn("\n Safety layer paussed, press the " + self.b_priority + " button to resume it\n")
+            rospy.sleep(1)
+            return
 
         # pause
         if msg.buttons[self.b_idx_pause]:
@@ -95,8 +114,7 @@ class JoystickBase(object):
             cmd.angular.z = self.max_angular_vel * msg.axes[self.a_idx_angular]
             cmd.linear.x = self.max_linear_vel * msg.axes[self.a_idx_linear]
 
-            if msg.buttons[self.b_idx_priority]:
-                rospy.logwarn_throttle(2, "Drive with care. Using the high priority joystick topic.")
+            if self.safety_layer:
                 self.pub_priority.publish(cmd)
             else:
                 self.pub.publish(cmd)
