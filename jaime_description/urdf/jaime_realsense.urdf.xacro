@@ -322,14 +322,14 @@
     <link name="case" type="fixed">
       <visual>
         <geometry>
-          <mesh filename="package://jaime_description/meshes/kobuki_hospital.stl"/>
+          <mesh filename="package://jaime_description/meshes/test_DR.stl"/>
         </geometry>
         <origin xyz="0 0 0" rpy="0 0 ${M_PI/2}"/>
       </visual>
     </link>
 
     <joint name="case_to_base_link" type="fixed">
-      <origin xyz="0 0 0.12"/>
+      <origin xyz="0 0 0"/>
       <parent link="base_link"/>
       <child link="case"/>
     </joint>
