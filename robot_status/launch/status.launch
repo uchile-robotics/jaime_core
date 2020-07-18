@@ -8,4 +8,9 @@
           <remap from="cmd_vel" to="/jaime/nav/safety/master_cmd_vel"/>
           <remap from="sound" to="/jaime/mobile_base/commands/sound"/>
   </node>
+
+  <node pkg="robot_status" type="colission_sound.py" name="colission" ns="$(arg ns)">
+  </node>
+  
+
 </launch>
