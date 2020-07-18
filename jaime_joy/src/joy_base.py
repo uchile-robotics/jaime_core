@@ -143,9 +143,10 @@ class JoystickBase(object):
             cmd.linear.x = self.max_linear_vel * msg.axes[self.a_idx_linear]
 
             if self.safety_layer:
-                self.pub_priority.publish(cmd)
-            else:
                 self.pub.publish(cmd)
+                
+            else:
+                self.pub_priority.publish(cmd)
 
             dt = time.time() - self.ltime
             if msg.buttons[self.b_idx_neck_up]:
