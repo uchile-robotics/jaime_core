@@ -9,7 +9,9 @@
           <remap from="sound" to="/jaime/mobile_base/commands/sound"/>
   </node>
 
-  <node pkg="robot_status" type="colission_sound.py" name="colission" ns="$(arg ns)">
+  <node pkg="robot_status" type="teleop_safety.py" name="colission" ns="$(arg ns)">
+    <remap from="joy_command"  to="/jaime/nav/mux/cmd_vel"/>
+	 	<remap from="safety_command" to="/jaime/nav/safety/cmd_vel"/>
   </node>
   
 
