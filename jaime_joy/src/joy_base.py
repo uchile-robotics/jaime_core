@@ -115,7 +115,7 @@ class JoystickBase(object):
 
         # pause
         if msg.buttons[self.b_idx_pause]:
-
+            self.ledon_pub_teleop.publish(self.is_paused)
             self.is_paused = not self.is_paused
             if self.is_paused:
 
