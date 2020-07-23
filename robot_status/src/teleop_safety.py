@@ -19,14 +19,14 @@ MIN_FACTOR = 0
 DISTANCE_MAX = 1.0
 DISTANCE_MIN = 0.40
 
-THETA_RANGE_INF = -0.436332 # 30 Degree
-THETA_RANGE_MAX = 0.436332
+THETA_RANGE_INF = -1.436332 # 30 Degree
+THETA_RANGE_MAX = 1.436332
 
 
 M = (MAX_PERIOD-MIN_PERIOD)/(DISTANCE_TH-DISTANCE_TH_2)
 M_SAFETY = 1 / (DISTANCE_MAX-DISTANCE_MIN)
 
-
+Y_RANGE = 0.2
 class teleop_safety():
 
     def __init__(self):
@@ -37,7 +37,7 @@ class teleop_safety():
         self.sound_period = 0.5
         self.safety_factor = 1
 
-        rospy.Subscriber('/jaime/xbox_kinetic/scan',LaserScan,self.laser_callback,queue_size=1)
+        rospy.Subscriber('/xbox_kinetic/scan',LaserScan,self.laser_callback,queue_size=1)
         rospy.Subscriber('/jaime/arduino/led/teleop',Bool,self.sound_callback,queue_size=1)
         rospy.Subscriber('joy_command',Twist,self.controller_callback,queue_size=10)
         
@@ -91,11 +91,14 @@ class teleop_safety():
         for r in msg.ranges:
             if THETA_RANGE_INF < theta_i < THETA_RANGE_MAX:
                 dx_ = r * np.cos(theta_i)
+                dy = r * np.sin(theta_i)
                 dx = laser_distance + dx_
-                if dx < min_range:
+                if abs(dy)>Y_RANGE:
+                    pass
+                elif dx < min_range:
                     min_range=dx
             theta_i += msg.angle_increment 
-        rospy.loginfo("min range {}".format(min_range))
+        #rospy.loginfo("min range {}".format(min_range))
         
         if min_range < DISTANCE_MAX:
             if min_range > DISTANCE_MIN:
