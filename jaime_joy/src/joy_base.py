@@ -29,6 +29,9 @@ class JoystickBase(object):
         self.ledon_pub_safety = rospy.Publisher('/jaime/arduino/led/safety',Bool,queue_size=2,latch=True)        
         self.ledon_pub_teleop = rospy.Publisher('/jaime/arduino/led/teleop',Bool,queue_size=2,latch=True)
         
+        self.speaker_pub = rospy.Publisher('/jaime/arduino/speaker',Bool,queue_size=2)
+        self.volume_pub = rospy.Publisher('/jaime/arduino/volume',Bool,queue_size=2)
+        
 
         # control
         self.is_paused = False
@@ -41,6 +44,8 @@ class JoystickBase(object):
         self.b_neck_up   = rospy.get_param('~b_neck_up', 'UP')
         self.b_neck_down = rospy.get_param('~b_neck_down', 'DOWN')
         self.b_neck_reset = rospy.get_param('~b_neck_reset', 'RIGHT')
+        self.b_speaker = rospy.get_param('~b_speaker', 'A')
+        self.b_volume = rospy.get_param('~b_volume', 'B')
         self.max_neck_vel = rospy.get_param('~max_neck_vel', 2)
         self.max_neck_ang = rospy.get_param('~max_neck_ang', 180.0)
         self.min_neck_ang = rospy.get_param('~min_neck_ang', 0.0)
@@ -54,6 +59,8 @@ class JoystickBase(object):
         
         key_mapper = xbox.KeyMapper()
         self.b_idx_pause    = key_mapper.get_button_id(self.b_pause)
+        self.b_idx_speaker    = key_mapper.get_button_id(self.b_speaker)
+        self.b_idx_volume    = key_mapper.get_button_id(self.b_volume)
         self.b_idx_cancel   = key_mapper.get_button_id(self.b_cancel)
         self.b_idx_priority = key_mapper.get_button_id(self.b_priority)
         self.b_idx_neck_up    = key_mapper.get_button_id(self.b_neck_up)
@@ -101,6 +108,19 @@ class JoystickBase(object):
         self.pub_neck.publish(cmd)
 
     def callback(self, msg):
+        if msg.buttons[self.b_idx_speaker]:
+            self.speaker_pub.publish(True)
+            rospy.sleep(0.1)
+            self.speaker_pub.publish(False)
+            rospy.sleep(0.1)
+            self.volume_pub.publish(True)
+            rospy.sleep(4)
+            self.volume_pub.publish(False)
+            
+
+        #if msg.buttons[self.b_idx_speaker]:
+            
+        
 
         # Safety Layer
         if msg.buttons[self.b_idx_priority]:
