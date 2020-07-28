@@ -22,6 +22,7 @@ class Depth2SampledPC(object):
         self.n_points    = rospy.get_param('~num_points', 1000)
         max_range   = rospy.get_param('~max_range', 2.)
         self.max_range = int(max_range*1000)
+        self.null_range = self.max_range
 
         # Get camera parameters
         camera_info_msg = rospy.wait_for_message("camera_info",CameraInfo)
@@ -52,27 +53,34 @@ class Depth2SampledPC(object):
     def depthCallback(self, msg):
         
         try:
-            depth_image = self.bridge.imgmsg_to_cv2(msg, "16UC1")
+            depth_image = self.bridge.imgmsg_to_cv2(msg, "16UC1").ravel()
             # Find valid points
-            valid_points = np.flatnonzero(np.logical_and(depth_image>0, depth_image<self.max_range))
-            try:
-                # Take sample from valid points
-                n_samples = min(self.n_points, valid_points.size)
-                sample = np.random.choice(valid_points,n_samples,replace=False)
-
-                # Calculate points position
-                depth = depth_image.ravel()[sample].astype(np.float32)
-                X= self.xx[sample]*depth
-                Y= self.yy[sample]*depth
-                Z = depth*CONV_FACTOR
-
-                # Create PC2 message
-                header = Header()
-                header.frame_id = self.cam_frame
-                pc2 = point_cloud2.create_cloud(header, self.fields, np.stack([X,Y,Z],axis=1))
-                self.pub.publish(pc2)
-            except:
+            valid_points = np.logical_and(depth_image>0, depth_image<self.max_range)
+            valid_index = np.nonzero(valid_points)[0]
+            if len(valid_index) == 0:
+                rospy.logwarn("No valid points")
                 return
+            # Change not valid to null range
+            null_index = np.nonzero(np.logical_not(valid_points))[0]
+            depth_image[null_index] = self.null_range
+            # Take sample from valid points
+            n_samples = min(self.n_points, valid_index.size)
+            sample_valid = np.random.choice(valid_index,n_samples-200,replace=False)
+            sample_null = np.random.choice(null_index,200,replace=False)
+            sample = np.hstack([sample_valid,sample_null])
+
+            # Calculate points position
+            depth = depth_image[sample].astype(np.float32)
+            X= self.xx[sample]*depth
+            Y= self.yy[sample]*depth
+            Z = depth*CONV_FACTOR
+
+            # Create PC2 message
+            header = Header()
+            header.frame_id = self.cam_frame
+            pc2 = point_cloud2.create_cloud(header, self.fields, np.stack([X,Y,Z],axis=1))
+            self.pub.publish(pc2)
+
 
         except CvBridgeError, e:
             print e
