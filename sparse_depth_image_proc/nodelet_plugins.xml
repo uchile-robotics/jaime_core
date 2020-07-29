@@ -1,0 +1,11 @@
+<library path="lib/libsparse_depth_image_proc">
+
+  <class name="sparse_depth_image_proc/point_cloud_xyz"
+	 type="sparse_depth_image_proc::PointCloudXyzNodelet"
+	 base_class_type="nodelet::Nodelet">
+    <description>
+      Nodelet to convert depth image to XYZ point cloud.
+    </description>
+  </class>
+
+</library>
