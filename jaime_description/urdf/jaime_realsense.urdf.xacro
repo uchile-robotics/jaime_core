@@ -225,106 +225,14 @@
       </inertial>
     </link>
 
-    <!-- kobuki agrega link_palo y base-->
-
-    <joint name="camara_joint" type="fixed">
-      <axis xyz="0 1 0" />
-      <origin xyz="0 0 0.8" rpy="0 0 0"/>
-      <parent link="link_palo"/>
-      <child link="camara"/>
-    </joint>
-
-
-    <!--joint camara de profunidad-->
-    <joint name="camara_profundidad_joint" type="fixed">
-      <!--axis xyz="0 1 0" /-->
-      <origin xyz ="0.1 0 0.15" rpy="0 0 0"/>  <!--heght480-640/2-->
-      <!--parent link="base_link"/-->
-      <parent link="pc_base_up"/>
-      <child link="camara_profundidad"/>
-    </joint>
-
-    <joint name="camara_profundidad_optical_joint" type="fixed">
-  <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
-  <parent link="camara_profundidad" />
-  <child link="camara_profundidad_optical" />
-</joint>
-
-
-<link name="camara_profundidad_optical"/>
-    <link name="camara">
-      <!--collision>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <geometry>
-      <box size="${camara ${camara} ${camara}"/>
-        </geometry>
-      </collision-->
-      <visual>
-        <origin xyz="0 0 0" rpy="${M_PI/2} ${M_PI/2} ${M_PI/2}"/>
-        <geometry>
-          <!--box size="${camara} ${camara} ${camara}"/-->
-          <mesh filename="package://jaime_description/meshes/camera_ASUS_XTION.STL"/>
-        </geometry>
-        <material name="red"/>
-      </visual>
-      <!--inertial>
-        <mass value="1e-5" />
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-      </inertial-->
-    </link>
-
-    <!--camara de profunidad, kinetic microsoft-->
-    <!---->
-    <link name="camara_profundidad" type="fixed"/>
-
-    <link name="link_palo" type="fixed"/>
-    
-    <link name="laser_link" type="fixed"/>
+    <link name="laser_link" type="fixed"/>    
 
     <joint name="base_link_to_laser_link" type="fixed">
-      <origin xyz="0.15 0.0 0.13"/>
+      <origin xyz="0.0861 0.0125 0.935"/>
       <parent link="base_link"/>
       <child link="laser_link"/>
     </joint>
 
-    <!--joint name="link_palo_base" type="fixed"-->
-    <joint name="link_palo_to_pc_base_up" type="fixed">
-      <origin xyz="0 0 0.8"/>
-      <parent link="pc_base_up"/>
-      <child link="link_palo"/>
-    </joint>
-
-    <link name="pc_base_down" type="fixed">
-
-    </link>
-
-    <joint name="pc_base_down_to_base_link" type="fixed">
-      <origin xyz="0 0 0.1"/>
-      <parent link="base_link"/>
-      <child link="pc_base_down"/>
-    </joint>
-
-    <link name="pc_base_up" type="fixed">
-
-    </link>
-
-    <joint name="pc_base_up_to_base_link" type="fixed">
-      <origin xyz="0 0 0.18"/>
-      <parent link="base_link"/>
-      <child link="pc_base_up"/>
-    </joint>
-
-    <link name="wood_base" type="fixed">
-
-    </link>
-
-
-    <joint name="wood_base_to_base_link" type="fixed">
-      <origin xyz="0 0 -0.018"/>
-      <parent link="base_link"/>
-      <child link="wood_base"/>
-    </joint>
     <link name="case" type="fixed">
       <visual>
         <geometry>
@@ -340,9 +248,9 @@
       <child link="case"/>
     </joint>
 
-    <!-- Kobuki Gazebo simulation details -->
-    <kobuki_sim/>
-  </xacro:macro>
+<!-- Kobuki Gazebo simulation details -->
+<kobuki_sim/>
+</xacro:macro>
 </robot>
 </world>
 </sdf>
