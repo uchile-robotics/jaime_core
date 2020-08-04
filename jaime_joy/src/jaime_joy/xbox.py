@@ -12,40 +12,72 @@
 # 3.- Y   # 8.- Xbox   # 13.- Up                      #
 # 4.- LB  # 9.- LS     # 14.- Down                    #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
+import subprocess
 
 class KeyMapper(object):
 
     def __init__(self):
+        print(self.is_original())
 
-        # - - - - BUTTON DEFINITIONS - - - -
-        self.b = {
-            'A'     : 0,
-            'B'     : 1,
-            'X'     : 2,
-            'Y'     : 3,
-            'LB'    : 4,
-            'RB'    : 5,
-            'BACK'  : 6,
-            'START' : 7,
-            'XBOX'  : 8,
-            'LS'    : 9,
-            'RS'    : 10,
-            'LEFT'  : 11,
-            'RIGHT' : 12,
-            'UP'    : 13,
-            'DOWN'  : 14
-        }
+        if self.is_original():
 
-        # - - - - AXES NUMBERS - - - -
-        self.a = {
-            'LS_HORZ' : 0,
-            'LS_VERT' : 1,
-            'LT'      : 2,
-            'RS_HORZ' : 3,
-            'RS_VERT' : 4,
-            'RT'      : 5
-        }
+            # - - - - BUTTON DEFINITIONS - - - -
+            self.b = {
+                'A'     : 0,
+                'B'     : 1,
+                'X'     : 2,
+                'Y'     : 3,
+                'LB'    : 4,
+                'RB'    : 5,
+                'BACK'  : 6,
+                'START' : 7,
+                'XBOX'  : 8,
+                'LS'    : 9,
+                'RS'    : 10,
+                'LEFT'  : 11,
+                'RIGHT' : 12,
+                'UP'    : 13,
+                'DOWN'  : 14
+            }
+
+            # - - - - AXES NUMBERS - - - -
+            self.a = {
+                'LS_HORZ' : 0,
+                'LS_VERT' : 1,
+                'LT'      : 2,
+                'RS_HORZ' : 3,
+                'RS_VERT' : 4,
+                'RT'      : 5
+            }
+        else:
+            # - - - - BUTTON DEFINITIONS - - - -
+            self.b = {
+                'Y'     : 0,
+                'B'     : 1,
+                'A'     : 2,
+                'X'     : 3,
+                'LB'    : 4,
+                'RB'    : 5,
+                'LT'    : 6,
+                'RT'    : 7,
+                'BACK'  : 8,
+                'START' : 9,
+                'XBOX'  : 10,
+                'L3'    : 11,
+                'R3'    : 12,
+            }
+            # - - - - AXES NUMBERS - - - -
+            self.a = {
+                'LS_HORZ' : 0,
+                'LS_VERT' : 1,
+                'RS_HORZ' : 2,
+                'RS_VERT' : 3,
+                'RIGHT'   : 4,
+                'LEFT'    : 4,
+                'UP'      : 5,
+                'DOWN'    : 5,   
+            }
+
 
     def has_button(self, name):
         return name in self.b
@@ -70,3 +102,8 @@ class KeyMapper(object):
             print("unknown axis named: %s" % name)
             return None
         return self.a[name]
+    
+    def is_original(self):
+        df = subprocess.check_output("lsusb")
+        return "Xbox" in df
+

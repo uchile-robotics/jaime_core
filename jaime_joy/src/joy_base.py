@@ -3,20 +3,32 @@
 __author__ = 'Matias Pavez'
 __email__ = 'matias.pavez.b@gmail.com'
 
+import os
 import time
 import numpy as np
 import rospy
+import re
 from std_srvs.srv import Empty
 from sensor_msgs.msg import Joy
 from geometry_msgs.msg import Twist
-from std_msgs.msg import Int16
-from jaime_joy import xbox
-from std_msgs.msg import Bool
+from std_msgs.msg import Int16, Bool
+import subprocess
+
+ALTERNATIVE = False
+
+#if os.environ['XBOX_ALTERNATIVE']:
+#    from jaime_joy import alternative_xbox as xbox
+#    ALTERNATIVE = True
+#else:
+from jaime_joy import xbox   
+
 
 
 class JoystickBase(object):
 
     def __init__(self):
+        global ALTERNATIVE
+
         rospy.loginfo('Joystick base init ...')
 
         self.pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
@@ -53,17 +65,25 @@ class JoystickBase(object):
         self.max_angular_vel = rospy.get_param('~max_angular_vel', 0.5)
         
         key_mapper = xbox.KeyMapper()
+        ALTERNATIVE = not key_mapper.is_original() 
+
         self.b_idx_pause    = key_mapper.get_button_id(self.b_pause)
         self.b_idx_cancel   = key_mapper.get_button_id(self.b_cancel)
         self.b_idx_priority = key_mapper.get_button_id(self.b_priority)
-        self.b_idx_neck_up    = key_mapper.get_button_id(self.b_neck_up)
-        self.b_idx_neck_down  = key_mapper.get_button_id(self.b_neck_down)
-        self.b_idx_neck_reset = key_mapper.get_button_id(self.b_neck_reset)
+        if ALTERNATIVE:
+            self.b_idx_neck  = key_mapper.get_axis_id(self.b_neck_up)
+            self.b_idx_neck_reset = key_mapper.get_axis_id(self.b_neck_reset)
+        else:
+            self.b_idx_neck_up    = key_mapper.get_button_id(self.b_neck_up)
+            self.b_idx_neck_down  = key_mapper.get_button_id(self.b_neck_down)
+            self.b_idx_neck_reset = key_mapper.get_button_id(self.b_neck_reset)
         self.a_idx_linear   = key_mapper.get_axis_id(a_linear)
         self.a_idx_angular  = key_mapper.get_axis_id(a_angular)
 
         # Set neck pos
         self.neck_pos  = self.neck_center_ang
+
+        self.clear_costmap = rospy.ServiceProxy('/jaime/safety/safe_teleop_base/clear_costmaps',Empty)
 
         # check
         self.assert_params()
@@ -74,6 +94,10 @@ class JoystickBase(object):
         self.ledon_pub_safety.publish(self.safety_layer)
         self.ledon_pub_teleop.publish(not self.is_paused)
         rospy.loginfo('Joystick for base is ready')
+        if ALTERNATIVE:
+            rospy.loginfo('Using Alternative Xbox controller')
+        else:
+            rospy.loginfo('Using Original Xbox controlller')
         
     def assert_params(self):
         """
@@ -104,6 +128,7 @@ class JoystickBase(object):
 
         # Safety Layer
         if msg.buttons[self.b_idx_priority]:
+            self.clear_costmap()
             self.safety_layer = not self.safety_layer
             self.ledon_pub_safety.publish(self.safety_layer)
             if self.safety_layer:
@@ -149,15 +174,32 @@ class JoystickBase(object):
                 self.pub_priority.publish(cmd)
 
             dt = time.time() - self.ltime
-            if msg.buttons[self.b_idx_neck_up]:
-                self.neck_pos += min(self.max_neck_vel * dt, self.max_neck_vel)
-                self.move_neck()
-            elif msg.buttons[self.b_idx_neck_down]:
-                self.neck_pos -= min(self.max_neck_vel * dt, self.max_neck_vel)
-                self.move_neck()
-            elif msg.buttons[self.b_idx_neck_reset]:
-                self.neck_pos = self.neck_center_ang
-                self.move_neck()
+            if ALTERNATIVE:
+                if msg.axes[self.b_idx_neck]>0.0:
+                    self.neck_pos += min(self.max_neck_vel * dt, self.max_neck_vel)
+                    self.move_neck()
+                    rospy.loginfo('Neck Up')
+                elif msg.axes[self.b_idx_neck]<0.0:
+                    self.neck_pos -= min(self.max_neck_vel * dt, self.max_neck_vel)
+                    self.move_neck()
+                    rospy.loginfo('Neck Down')
+                elif msg.axes[self.b_idx_neck_reset]<0.0:
+                    self.neck_pos = self.neck_center_ang
+                    self.move_neck()
+                    rospy.loginfo('Neck Reset')
+            else:
+                if msg.buttons[self.b_idx_neck_up]:
+                    self.neck_pos += min(self.max_neck_vel * dt, self.max_neck_vel)
+                    self.move_neck()
+                    rospy.loginfo('Neck Up')
+                elif msg.buttons[self.b_idx_neck_down]:
+                    self.neck_pos -= min(self.max_neck_vel * dt, self.max_neck_vel)
+                    self.move_neck()
+                    rospy.loginfo('Neck Down')
+                elif msg.buttons[self.b_idx_neck_reset]:
+                    self.neck_pos = self.neck_center_ang
+                    self.move_neck()
+                    rospy.loginfo('Neck Reset')
             self.ltime = time.time()
 
 if __name__ == '__main__':
