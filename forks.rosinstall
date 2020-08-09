@@ -50,4 +50,4 @@
 - git:
     local-name: shared_autonomy_manipulation
     uri: https://github.com/uchile-robotics-forks/shared_autonomy_manipulation.git
-    version: hydro-level 
+    version: hydro-level
