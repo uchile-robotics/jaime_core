@@ -44,6 +44,10 @@
     uri: https://github.com/yujinrobot/kobuki_desktop.git
     version: melodic
 - git:
-    local-name: navigation
-    uri: https://github.com/JavierUR/navigation.git
-    version: melodic-devel
+    local-name: realsense-ros
+    uri: https://github.com/uchile-robotics-forks/realsense-ros.git
+    version: development
+-git:
+    local-name: shared_autonomy_manipulation
+    uri: https://github.com/uchile-robotics-forks/shared_autonomy_manipulation.git
+    version: hydro-level
