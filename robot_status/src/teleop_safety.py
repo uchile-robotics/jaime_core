@@ -58,7 +58,7 @@ class teleop_safety():
         if msg.linear.x > 0:
             msg.linear.x = msg.linear.x * self.safety_factor
         else:
-            msg.linear.x = msg.linear.x * 0.5
+            msg.linear.x = msg.linear.x
         self.cmd_pub.publish(msg)
         return
 

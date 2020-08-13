@@ -11,7 +11,7 @@
 
   <node pkg="robot_status" type="teleop_safety.py" name="colission" ns="$(arg ns)">
     <remap from="joy_command"  to="/jaime/nav/mux/cmd_vel"/>
-	 	<remap from="safety_command" to="/jaime/nav/safety/cmd_vel"/>
+	 <remap from="safety_command" to="/jaime/nav/safety/cmd_vel"/>
   </node>
   
 

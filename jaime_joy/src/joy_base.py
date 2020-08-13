@@ -83,7 +83,7 @@ class JoystickBase(object):
         # Set neck pos
         self.neck_pos  = self.neck_center_ang
 
-        self.clear_costmap = rospy.ServiceProxy('/jaime/safety/safe_teleop_base/clear_costmaps',Empty)
+        #self.clear_costmap = rospy.ServiceProxy('/jaime/safety/safe_teleop_base/clear_costmaps',Empty)
 
         # check
         self.assert_params()
@@ -128,7 +128,7 @@ class JoystickBase(object):
 
         # Safety Layer
         if msg.buttons[self.b_idx_priority]:
-            self.clear_costmap()
+            #self.clear_costmap()
             self.safety_layer = not self.safety_layer
             self.ledon_pub_safety.publish(self.safety_layer)
             if self.safety_layer:
