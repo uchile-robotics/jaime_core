@@ -7,11 +7,11 @@
     <arg name="ns" value="$(arg ns)"/>
     </include>
 
-    <node pkg="jaime_joy" type="joy_base.py" name="joy_base" output="screen">
+    <node pkg="jaime_joy" type="joy_base.py" name="joy_base" output="screen" ns="$(arg ns)">
         <rosparam file="$(find jaime_joy)/config/joystick_base.yaml" command="load"/>
         <remap from="cmd_vel" to="joy_velocity_smoother/raw_cmd_vel"/>
-        <remap from="base/master_cmd_vel" to="$(arg ns)/base/master_cmd_vel"/>
-        <remap from="joy" to="$(arg ns)/joy"/>
+        <remap from="base/master_cmd_vel" to="joy_master_velocity_smoother/raw_cmd_vel"/>
+        <remap from="servo" to="/jaime/arduino/servo"/>
     </node>
 
 

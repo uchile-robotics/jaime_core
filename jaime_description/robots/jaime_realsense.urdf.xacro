@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot name="jaime_realsense"
+       xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Defines the kobuki component tag. -->
+  <xacro:include filename="$(find jaime_description)/urdf/jaime_realsense.urdf.xacro" />
+  <!-- Add Realsense -->
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro"/>
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+  <sensor_d435 parent="laser_link">
+    <!--origin xyz="0.0 0.0 0" rpy="0 ${-M_PI/3} 0"/-->
+    <origin xyz="0.0 0.0 0.0" rpy="0 ${-M_PI/5} 0"/>
+	</sensor_d435>
+  <kobuki/>
+</robot>

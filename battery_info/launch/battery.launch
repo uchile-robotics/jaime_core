@@ -1,0 +1,5 @@
+<launch>
+  <arg name="ns" default="jaime/battery"/>
+  <node pkg="battery_info" type="battery.py" name="battery" ns="$(arg ns)">
+  </node>
+</launch>

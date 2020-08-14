@@ -1,0 +1,18 @@
+<launch>
+  <arg name="ns" default="/jaime"/>
+  <node pkg="robot_status" type="status.py" name="status" ns="$(arg ns)">
+  </node>
+  
+  <node pkg="robot_status" type="shutdown_srv.py" name="shutdown_service" ns="$(arg ns)">
+          <remap from="base_vel" to="/jaime/mobile_base/commands/velocity"/>
+          <remap from="cmd_vel" to="/jaime/nav/safety/master_cmd_vel"/>
+          <remap from="sound" to="/jaime/mobile_base/commands/sound"/>
+  </node>
+
+  <node pkg="robot_status" type="teleop_safety.py" name="colission" ns="$(arg ns)">
+    <remap from="joy_command"  to="/jaime/nav/mux/cmd_vel"/>
+	 	<remap from="safety_command" to="/jaime/nav/safety/cmd_vel"/>
+  </node>
+  
+
+</launch>

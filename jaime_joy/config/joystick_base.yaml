@@ -7,7 +7,16 @@ b_pause: 'START'
 b_cancel: 'B'
 
 # high priority joystick button
-b_priority: 'LB'
+b_priority: 'BACK'
+
+# move neck up button
+b_neck_up: 'UP'
+
+# move neck down button
+b_neck_down: 'DOWN'
+
+# reset neck position button
+b_neck_reset: 'RIGHT'
 
 # movement axes
 a_angular: 'LS_HORZ'
@@ -16,3 +25,15 @@ a_linear:  'LS_VERT'
 # cmd velocities
 max_linear_vel: 0.5   # caution: do not use values higher than 0.7 
 max_angular_vel: 0.6  # caution: do not use values higher than 0.8
+
+# neck angular velocity in deg/sec
+max_neck_vel: 2
+
+# neck maximum angle in sexagesimal degrees
+max_neck_ang: 180
+
+# neck minimum angle in sexagesimal degrees
+min_neck_ang: 0
+
+# neck center angle position in sexagesimal degrees
+neck_center_ang: 90
