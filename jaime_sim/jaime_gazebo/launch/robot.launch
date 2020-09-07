@@ -18,7 +18,7 @@
     <!-- All the stuff as from usual robot launch file -->
 
     <!-- PointCloud to LaserScan -->
-    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan_node" output="screen" >
+    <!--node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan_node" output="screen" >
     <remap from="cloud_in" to="xbox_kinetic/depth/points"/>
     <remap from="scan" to="xbox_kinetic/scan" />
     <param name="target_frame" value="$(arg robot_name)_tf/camara_profundidad"/>
@@ -41,6 +41,6 @@
         # 2: inf : Parallelism level
         concurrency_level: 1
     </rosparam>
-    </node>
+    </node-->
     
 </launch>
