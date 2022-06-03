@@ -1,9 +1,10 @@
 <launch>
 
   <!-- Tipo de modelo standard|base -->
-  <arg name="model_type" default="jaime_asus" />
 
-  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find jaime_description)/robots/$(arg model_type).urdf.xacro'"/>
+  <arg name="model_type" default="jaime_standalone" />
+
+  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find jaime_description)/urdf/$(arg model_type).urdf.xacro'"/>
 
   <param name="robot_description" command="$(arg urdf_file)"/>
 
