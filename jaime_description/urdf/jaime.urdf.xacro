@@ -218,139 +218,11 @@
                  iyy="0.0001" iyz="0.0"
                  izz="0.0001" />
       </inertial>
-    </link>
-
-    <!-- kobuki agrega link_palo y base-->
-
-    <joint name="camara_joint" type="fixed">
-      <axis xyz="0 1 0" />
-      <origin xyz="0 0 0.8" rpy="0 0 0"/>
-      <parent link="link_palo"/>
-      <child link="camara"/>
-    </joint>
-
-
-    <!--joint camara de profunidad-->
-    <joint name="camara_profundidad_joint" type="fixed">
-      <!--axis xyz="0 1 0" /-->
-      <origin xyz ="0.1 0 0.15" rpy="0 0 0"/>  <!--heght480-640/2-->
-      <!--parent link="base_link"/-->
-      <parent link="pc_base_up"/>
-      <child link="camara_profundidad"/>
-    </joint>
-
-    <joint name="camara_profundidad_optical_joint" type="fixed">
-  <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
-  <parent link="camara_profundidad" />
-  <child link="camara_profundidad_optical" />
-</joint>
-
-
-<link name="camara_profundidad_optical"/>
-    <link name="camara">
-      <!--collision>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <geometry>
-      <box size="${camara ${camara} ${camara}"/>
-        </geometry>
-      </collision-->
-      <visual>
-        <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
-        <geometry>
-          <!--box size="${camara} ${camara} ${camara}"/-->
-          <mesh filename="package://jaime_description/meshes/camera_ASUS_XTION.STL"/>
-        </geometry>
-        <material name="red"/>
-      </visual>
-      <!--inertial>
-        <mass value="1e-5" />
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-      </inertial-->
-    </link>
-
-    <!--camara de profunidad, kinetic microsoft-->
-
-    <link name="camara_profundidad" type="fixed">
-      <visual>
-        <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
-        <geometry>
-          <!--box size="0.1 0.1 0.1"/-->
-          <!--mesh filename="package://jaime_description/meshes/wheel.dae"/-->
-          <mesh filename="package://jaime_description/meshes/camera_ASUS_XTION.STL"/>
-        </geometry>
-      </visual>
-    </link>
-
-    <link name="link_palo" type="fixed">
-      <visual>
-        <geometry>
-          <cylinder length="1.42" radius="0.0125"/>
-          <material name="black">
-            <color rgba="0.1 0.1 0.1 1"/>
-          </material>
-        </geometry>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-      </visual>
-    </link>
-
-    <!--joint name="link_palo_base" type="fixed"-->
-    <joint name="link_palo_to_pc_base_up" type="fixed">
-      <origin xyz="0 0 0.8"/>
-      <parent link="pc_base_up"/>
-      <child link="link_palo"/>
-    </joint>
-
-    <link name="pc_base_down" type="fixed">
-      <visual>
-        <geometry>
-          <mesh filename="package://jaime_description/meshes/pc_base_down.STL"/>
-        </geometry>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-      </visual>
-    </link>
-
-    <joint name="pc_base_down_to_base_link" type="fixed">
-      <origin xyz="0 0 0.1"/>
-      <parent link="base_link"/>
-      <child link="pc_base_down"/>
-    </joint>
-
-    <link name="pc_base_up" type="fixed">
-      <visual>
-        <geometry>
-          <mesh filename="package://jaime_description/meshes/pc_base_up.STL"/>
-        </geometry>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-      </visual>
-    </link>
-
-    <joint name="pc_base_up_to_base_link" type="fixed">
-      <origin xyz="0 0 0.18"/>
-      <parent link="base_link"/>
-      <child link="pc_base_up"/>
-    </joint>
-
-    <link name="wood_base" type="fixed">
-      <visual>
-        <geometry>
-          <mesh filename="package://jaime_description/meshes/wood_base.STL"/>
-        </geometry>
-        <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
-      </visual>
-    </link>
-
-    <joint name="wood_base_to_base_link" type="fixed">
-      <origin xyz="0 0 -0.018"/>
-      <parent link="base_link"/>
-      <child link="wood_base"/>
-    </joint>
-
-    <!-- uso del lidar -->
+    </link>    <!-- uso del lidar -->
 
     <link name="laser">
       <visual>
-        <origin xyz="0 0 0.003"/>
+        <origin xyz="0 0 0.09"/>
         <geometry>
           <box size="0.079 0.05 0.006"/>
         </geometry>
@@ -359,7 +231,7 @@
     </material>
   </visual>
   <visual>
-    <origin xyz="0 0 0.041"/>
+    <origin xyz="0 0 0.12"/>
     <geometry>
       <box size="0.05 0.05 0.07"/>
     </geometry>
@@ -368,13 +240,13 @@
     </material>
   </visual>
   <collision>
-    <origin xyz="0 0 0.003"/>
+    <origin xyz="0 0 0.09"/>
     <geometry>
       <box size="0.079 0.05 0.006"/>
     </geometry>
   </collision>
   <collision>
-    <origin xyz="0 0 0.041"/>
+    <origin xyz="0 0 0.131"/>
     <geometry>
       <box size="0.05 0.05 0.07"/>
     </geometry>
