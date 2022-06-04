@@ -3,7 +3,7 @@
     <arg name="init_pose_x"/>
     <arg name="init_pose_y"/>
     <arg name="init_pose"/>
-    <arg name="model_type" default="jaime_asus"/>
+    <arg name="model_type" default="jaime_standalone"/>
 
     <param name="base_prefix" value="mobile_base"/>
 
@@ -11,7 +11,7 @@
      args="$(arg init_pose) -urdf -param /robot_description -model $(arg robot_name)"
      respawn="false" output="screen" />
 
-    <node pkg="robot_state_publisher" type="state_publisher" 
+    <node pkg="robot_state_publisher" type="state_publisher"
           name="robot_state_publisher" output="screen"/>
 
     <!-- The odometry estimator, throttling, fake laser etc. go here -->
@@ -42,5 +42,5 @@
         concurrency_level: 1
     </rosparam>
     </node-->
-    
+
 </launch>
