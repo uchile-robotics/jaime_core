@@ -8,8 +8,8 @@
     <arg name="gazebo_gui"     default="true"/>
 
     <!-- robot simulation -->
-	<arg name="worldname"  default="empty"/>
-    <arg name="use_sim_time"           default="true"/>
+	<arg name="worldname"      default="empty"/>
+    <arg name="use_sim_time"   default="true"/>
 
     <!-- Load the URDF Model -->
     <include file="$(find jaime_description)/launch/load_model.launch">
@@ -21,6 +21,7 @@
         <arg name="world_name" value="$(find uchile_gazebo)/worlds/$(arg worldname).world"/>
         <arg name="use_sim_time" value="$(arg use_sim_time)"/>
         <arg name="gui" value="$(arg gazebo_gui)"/>
+        <arg name="verbose" value="true"/>
     </include>
 
 
