@@ -1,0 +1,19 @@
+<launch>
+
+    <param name="robot_description" value="$(find xacro)/xacro $(find jaime_description)/urdf/laser.xacro"/>
+    
+    <arg name="robot_name" default="robot_description"/>
+
+    <!-- Launch Gazebo with empty world -->
+    <include file="$(find jaime_gazebo)/worlds/empty.world">
+        <arg name="verbose" value="true"/>
+    </include>
+
+    <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"
+     args="
+        -urdf 
+        -param $(arg robot_name) 
+        -model laser"
+     respawn="false" output="screen" />
+
+</launch>
