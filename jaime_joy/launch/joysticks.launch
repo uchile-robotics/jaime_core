@@ -1,7 +1,7 @@
 <launch>
 
     <!-- parameters -->
-    <arg name="ns" default="/jaime/joy"/>
+    <arg name="ns" default="joy"/>
 
     <!-- drivers -->
     <include file="$(find jaime_joy)/launch/common/driver.xml">
