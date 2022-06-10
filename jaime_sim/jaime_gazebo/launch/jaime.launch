@@ -8,7 +8,7 @@
     <arg name="gazebo_gui"     default="true"/>
 
     <!-- robot simulation -->
-	<arg name="worldname"      default="empty"/>
+	<arg name="worldname"      default="robocup19_home_arena"/>
     <arg name="use_sim_time"   default="true"/>
 
     <!-- Load the URDF Model -->
