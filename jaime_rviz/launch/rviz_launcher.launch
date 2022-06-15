@@ -5,5 +5,5 @@
 
   <param name="robot_description" command="$(arg urdf_file)"/>
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find jaime_rviz)/config/map.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find jaime_rviz)/config/loclaization.rviz"/>
 </launch>
