@@ -6,9 +6,12 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Frames1
+<<<<<<< HEAD
         - /Map2
         - /Map3
         - /Path1
+=======
+>>>>>>> 04004fd6320aade6d5e5495ad35cd09864a1ac07
       Splitter Ratio: 0.5
     Tree Height: 823
   - Class: rviz/Selection
@@ -242,6 +245,7 @@ Visualization Manager:
       Topic: /particlecloud
       Unreliable: false
       Value: true
+<<<<<<< HEAD
     - Alpha: 1
       Class: rviz/Map
       Color Scheme: raw
@@ -285,6 +289,8 @@ Visualization Manager:
       Topic: /move_base/NavfnROS/plan
       Unreliable: false
       Value: true
+=======
+>>>>>>> 04004fd6320aade6d5e5495ad35cd09864a1ac07
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -308,25 +314,29 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
+<<<<<<< HEAD
       Distance: 12.306922912597656
+=======
+      Distance: 6.309054374694824
+>>>>>>> 04004fd6320aade6d5e5495ad35cd09864a1ac07
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 5.064542293548584
-        Y: -0.6649246215820312
-        Z: 0.7911863327026367
+        X: 2.25241756439209
+        Y: 1.2204861640930176
+        Z: -0.7808703184127808
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8753980398178101
+      Pitch: 0.5203981399536133
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.455411911010742
+      Yaw: 3.9754106998443604
     Saved: ~
 Window Geometry:
   Displays:
