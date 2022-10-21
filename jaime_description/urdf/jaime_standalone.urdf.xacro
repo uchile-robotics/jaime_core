@@ -7,5 +7,6 @@
 
   <!-- Defines the Jaime component tag. -->
   <xacro:include filename="$(find jaime_description)/urdf/jaime.urdf.xacro" />
+  
   <xacro:kobuki/>
 </robot>

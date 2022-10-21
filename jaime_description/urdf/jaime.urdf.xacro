@@ -8,6 +8,7 @@
  -->
 <robot name="kobuki" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find jaime_description)/urdf/common_properties.urdf.xacro"/>
+  <xacro:include filename="$(find jaime_description)/urdf/jaime_sensors_properties.urdf.xacro"/>
   <xacro:include filename="$(find jaime_description)/urdf/jaime_gazebo.urdf.xacro"/>
 
   <!-- Kobuki -->
@@ -252,6 +253,105 @@
     </geometry>
   </collision>
 </link-->
+
+<!-- depth camera -->
+
+    <!-- camera body, with origin at bottom screw mount -->
+    <joint name="camera_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.85" rpy="0 0.610865 0"/>
+      <parent link="base_link"/>
+      <child link="camera_bottom_screw_frame" />
+    </joint>
+    <link name="camera_bottom_screw_frame"/>
+  
+    <joint name="camera_link_joint" type="fixed">
+      <origin xyz="0 ${d435_cam_depth_py} ${d435_cam_depth_pz}" rpy="0 0 0"/>
+      <parent link="camera_bottom_screw_frame"/>
+      <child link="camera_link" />
+    </joint>
+  
+    <link name="camera_link">
+      <visual>
+      <origin xyz="${d435_cam_mount_from_center_offset} ${-d435_cam_depth_py} 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
+        <geometry>
+          <!-- <box size="${d435_cam_width} ${d435_cam_height} ${d435_cam_depth}"/> -->
+          <mesh filename="package://jaime_description/meshes/d435.dae" />
+          <!--<mesh filename="package://realsense2_description/meshes/d435/d435.dae" />-->
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 ${-d435_cam_depth_py} 0" rpy="0 0 0"/>
+        <geometry>
+        <box size="${d435_cam_depth} ${d435_cam_width} ${d435_cam_height}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <!-- The following are not reliable values, and should not be used for modeling -->
+        <mass value="0.564" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.003881243" ixy="0.0" ixz="0.0" iyy="0.000498940" iyz="0.0" izz="0.003879257" />
+      </inertial>
+    </link>
+
+ <!-- camera depth joints and links -->
+  <joint name="camera_depth_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="camera_link"/>
+    <child link="camera_depth_frame" />
+  </joint>
+  <link name="camera_depth_frame"/>
+
+  <joint name="camera_depth_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+    <parent link="camera_depth_frame" />
+    <child link="camera_depth_optical_frame" />
+  </joint>
+  <link name="camera_depth_optical_frame"/>
+
+<!-- camera left IR joints and links -->
+<joint name="camera_left_ir_joint" type="fixed">
+  <origin xyz="0 ${d435_cam_depth_to_left_ir_offset} 0" rpy="0 0 0" />
+  <parent link="camera_depth_frame" />
+  <child link="camera_left_ir_frame" />
+</joint>
+<link name="camera_left_ir_frame"/>
+
+<joint name="camera_left_ir_optical_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+  <parent link="camera_left_ir_frame" />
+  <child link="camera_left_ir_optical_frame" />
+</joint>
+<link name="camera_left_ir_optical_frame"/>
+
+<!-- camera right IR joints and links -->
+<joint name="camera_right_ir_joint" type="fixed">
+  <origin xyz="0 ${d435_cam_depth_to_right_ir_offset} 0" rpy="0 0 0" />
+  <parent link="camera_depth_frame" />
+  <child link="camera_right_ir_frame" />
+</joint>
+<link name="camera_right_ir_frame"/>
+
+<joint name="camera_right_ir_optical_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+  <parent link="camera_right_ir_frame" />
+  <child link="camera_right_ir_optical_frame" />
+</joint>
+<link name="camera_right_ir_optical_frame"/>
+
+<!-- camera color joints and links -->
+<joint name="camera_color_joint" type="fixed">
+  <origin xyz="0 ${d435_cam_depth_to_color_offset} 0" rpy="0 0 0" />
+  <parent link="camera_depth_frame" />
+  <child link="camera_color_frame" />
+</joint>
+<link name="camera_color_frame"/>
+
+<joint name="camera_color_optical_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+  <parent link="camera_color_frame" />
+  <child link="camera_color_optical_frame" />
+</joint>
+<link name="camera_color_optical_frame"/>
 
 <!-- Hokuyo Laser -->
 <link name="laser">
