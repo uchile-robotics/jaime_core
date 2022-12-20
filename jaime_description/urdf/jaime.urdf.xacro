@@ -353,6 +353,9 @@
 </joint>
 <link name="camera_color_optical_frame"/>
 
+<!-- depth camera aligned joints and links-->
+
+
 <!-- Hokuyo Laser -->
 <link name="laser">
   <collision>

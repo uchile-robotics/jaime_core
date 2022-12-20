@@ -79,8 +79,8 @@
 			<camera name="${camera_name}">
 				<horizontal_fov>${69.4*deg_to_rad}</horizontal_fov>
 				<image>
-				<width>1920</width>
-				<height>1080</height>
+				<width>640</width>
+				<height>480</height>
 				<format>RGB_INT8</format>
 				</image>
 				<clip>
