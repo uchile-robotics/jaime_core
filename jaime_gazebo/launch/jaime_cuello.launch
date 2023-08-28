@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- robot configuration -->
+	<arg name="model_type"     default="jaime_standalone"/>
+
+    <!-- GUI -->
+	<arg name="rviz"           default="true"/>
+    <arg name="gazebo_gui"     default="true"/>
+
+    <!-- robot simulation -->
+	<arg name="worldname"      default="jaime"/>
+    <arg name="use_sim_time"   default="true"/>
+    <arg name="paused"   default="false"/>
+
+    <!-- Load the URDF Model -->
+    <include file="$(find jaime_description)/launch/load_model.launch">
+        <arg name="model_type" value="$(arg model_type)"/>
+    </include >
+
+    <!-- Launch Gazebo with empty world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find jaime_gazebo)/worlds/$(arg worldname).world"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="gui" value="$(arg gazebo_gui)"/>
+        <arg name="verbose" value="true"/>
+        <arg name="paused" value="$(arg paused)"/>
+    </include>
+
+
+    <!-- BEGIN ROBOT 1-->
+    <include file="$(find jaime_gazebo)/launch/robot.launch" >
+        <arg name="robot_name"  value="kobuki"/>
+        <arg name="init_pose"   value="-x 0 -y 0 -z 0"/>
+        <arg name="init_pose_x" value="0"/>
+        <arg name="init_pose_y" value="0"/>
+    </include>
+    <include file="$(find jaime_controller)/launch/jaime_control.launch"/>
+    
+    <!--include file="$(find jaime_joy)/launch/joysticks.launch"/>
+    <include file="$(find uchile_cmd_vel_mux)/launch/mux_jaime.launch"/!-->
+</launch>
