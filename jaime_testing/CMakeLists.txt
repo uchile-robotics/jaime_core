@@ -12,7 +12,6 @@ find_package(ament_cmake REQUIRED)
 # find_package(<dependency> REQUIRED)
 install(
   PROGRAMS
-  scripts/goal_pose_node.py
   scripts/nav_test.py
   DESTINATION lib/${PROJECT_NAME}
 )
