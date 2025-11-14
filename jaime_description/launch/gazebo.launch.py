@@ -10,7 +10,7 @@ from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, Grou
 def generate_launch_description():
 
     # Package name
-    package_name='bender_description'
+    package_name='jaime_description'
 
     world = LaunchConfiguration('world')
     # Path to default world 
@@ -21,7 +21,7 @@ def generate_launch_description():
         description='Full path to the world model file to load')
     
     # Default robot description if none is specified
-    urdf_path = PathJoinSubstitution([get_package_share_directory(package_name), "urdf", "bender.xacro"])
+    urdf_path = PathJoinSubstitution([get_package_share_directory(package_name), "urdf", "jaime.xacro"])
     
     # Launch configurations
     urdf = LaunchConfiguration('urdf')
@@ -61,7 +61,7 @@ def generate_launch_description():
     spawn = Node(package='ros_gz_sim', 
                 executable='create',
                 arguments=['-topic', 'robot_description',
-                           '-name', 'bender',
+                           '-name', 'jaime',
                            ],
                 output='screen'
     )
