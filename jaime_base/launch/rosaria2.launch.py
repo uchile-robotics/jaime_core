@@ -6,7 +6,7 @@ from ament_index_python.packages import get_package_share_directory
 import os
 def generate_launch_description(*args, **kwargs):
     # Get launch configurations
-    pkg = 'bender_base'
+    pkg = 'jaime_base'
     parameters = [os.path.join(
         get_package_share_directory(pkg),
         'params',

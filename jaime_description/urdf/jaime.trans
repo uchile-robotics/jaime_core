@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot name="bender" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<robot name="jaime" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
 <transmission name="l2l_to_l1l_tran">
   <type>transmission_interface/SimpleTransmission</type>

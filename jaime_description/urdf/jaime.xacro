@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot name="bender" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="jaime" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 
 <link name="base_link">
@@ -13,7 +13,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -22,7 +22,7 @@
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -44,7 +44,7 @@
   <visual>
     <origin xyz="-0.035737 -0.247634 -1.04582" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l2l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l2l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -53,7 +53,7 @@
   <collision>
     <origin xyz="-0.035737 -0.247634 -1.04582" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l2l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l2l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -67,7 +67,7 @@
   <visual>
     <origin xyz="-0.007987 -0.247634 -0.985406" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l3l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l3l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -76,7 +76,7 @@
   <collision>
     <origin xyz="-0.007987 -0.247634 -0.985406" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l3l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l3l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -90,7 +90,7 @@
   <visual>
     <origin xyz="-0.006819 -0.275388 -0.815556" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l4l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l4l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -99,7 +99,7 @@
   <collision>
     <origin xyz="-0.006819 -0.275388 -0.815556" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l4l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l4l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -113,7 +113,7 @@
   <visual>
     <origin xyz="-0.006819 -0.247637 -0.767806" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l5l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l5l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -122,7 +122,7 @@
   <collision>
     <origin xyz="-0.006819 -0.247637 -0.767806" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l5l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l5l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -136,7 +136,7 @@
   <visual>
     <origin xyz="-0.007275 -0.269887 -0.504262" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l6l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l6l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -145,7 +145,7 @@
   <collision>
     <origin xyz="-0.007275 -0.269887 -0.504262" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l6l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l6l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -159,7 +159,7 @@
   <visual>
     <origin xyz="-0.035737 0.262366 -1.04582" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l2r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l2r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -168,7 +168,7 @@
   <collision>
     <origin xyz="-0.035737 0.262366 -1.04582" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l2r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l2r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -182,7 +182,7 @@
   <visual>
     <origin xyz="-0.007987 0.262366 -0.985406" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l3r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l3r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -191,7 +191,7 @@
   <collision>
     <origin xyz="-0.007987 0.262366 -0.985406" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l3r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l3r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -205,7 +205,7 @@
   <visual>
     <origin xyz="-0.006819 0.290116 -0.815556" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l4r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l4r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -214,7 +214,7 @@
   <collision>
     <origin xyz="-0.006819 0.290116 -0.815556" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l4r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l4r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -228,7 +228,7 @@
   <visual>
     <origin xyz="-0.006819 0.262364 -0.767806" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l5r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l5r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -237,7 +237,7 @@
   <collision>
     <origin xyz="-0.006819 0.262364 -0.767806" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l5r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l5r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -251,7 +251,7 @@
   <visual>
     <origin xyz="-0.007275 0.284614 -0.504262" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l6r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l6r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -260,7 +260,7 @@
   <collision>
     <origin xyz="-0.007275 0.284614 -0.504262" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l6r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l6r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -274,7 +274,7 @@
   <visual>
     <origin xyz="-0.007987 0.037366 -1.28382" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l2h_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l2h_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -283,7 +283,7 @@
   <collision>
     <origin xyz="-0.007987 0.037366 -1.28382" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l2h_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l2h_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -297,7 +297,7 @@
   <visual>
     <origin xyz="-0.049487 0.007366 -1.40882" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/real_sense_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/real_sense_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -306,7 +306,7 @@
   <collision>
     <origin xyz="-0.049487 0.007366 -1.40882" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/real_sense_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/real_sense_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -320,7 +320,7 @@
   <visual>
     <origin xyz="-0.007275 0.262364 -0.480247" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g1r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g1r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -329,7 +329,7 @@
   <collision>
     <origin xyz="-0.007275 0.262364 -0.480247" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g1r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g1r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -343,7 +343,7 @@
   <visual>
     <origin xyz="-0.029225 0.243864 -0.438647" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g2ra_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g2ra_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -352,7 +352,7 @@
   <collision>
     <origin xyz="-0.029225 0.243864 -0.438647" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g2ra_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g2ra_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -366,7 +366,7 @@
   <visual>
     <origin xyz="-0.029225 0.280864 -0.438647" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g2rb_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g2rb_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -375,7 +375,7 @@
   <collision>
     <origin xyz="-0.029225 0.280864 -0.438647" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g2rb_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g2rb_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -389,7 +389,7 @@
   <visual>
     <origin xyz="-0.007275 -0.247637 -0.480247" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g1l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g1l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -398,7 +398,7 @@
   <collision>
     <origin xyz="-0.007275 -0.247637 -0.480247" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g1l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g1l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -412,7 +412,7 @@
   <visual>
     <origin xyz="-0.029225 -0.266137 -0.438647" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g2lb_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g2lb_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -421,7 +421,7 @@
   <collision>
     <origin xyz="-0.029225 -0.266137 -0.438647" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g2lb_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g2lb_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -435,7 +435,7 @@
   <visual>
     <origin xyz="-0.029225 -0.229137 -0.438647" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g2la_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g2la_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -444,7 +444,7 @@
   <collision>
     <origin xyz="-0.029225 -0.229137 -0.438647" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/g2la_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/g2la_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -458,7 +458,7 @@
   <visual>
     <origin xyz="-0.188322 0.007366 -0.25882" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -467,7 +467,7 @@
   <collision>
     <origin xyz="-0.188322 0.007366 -0.25882" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -481,7 +481,7 @@
   <visual>
     <origin xyz="-0.135487 0.164865 -0.09982" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/wfr_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/wfr_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -490,7 +490,7 @@
   <collision>
     <origin xyz="-0.135487 0.164865 -0.09982" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/wfr_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/wfr_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -504,7 +504,7 @@
   <visual>
     <origin xyz="0.114513 0.164865 -0.09982" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/wrr_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/wrr_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -513,7 +513,7 @@
   <collision>
     <origin xyz="0.114513 0.164865 -0.09982" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/wrr_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/wrr_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -527,7 +527,7 @@
   <visual>
     <origin xyz="-0.135487 -0.150135 -0.09982" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/wfl_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/wfl_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -536,7 +536,7 @@
   <collision>
     <origin xyz="-0.135487 -0.150135 -0.09982" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/wfl_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/wfl_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -550,7 +550,7 @@
   <visual>
     <origin xyz="0.114513 -0.150135 -0.09982" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/wrl_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/wrl_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -559,7 +559,7 @@
   <collision>
     <origin xyz="0.114513 -0.150135 -0.09982" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/wrl_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/wrl_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -573,7 +573,7 @@
   <visual>
     <origin xyz="-0.007987 0.227866 -1.06382" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l1r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l1r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -582,7 +582,7 @@
   <collision>
     <origin xyz="-0.007987 0.227866 -1.06382" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l1r_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l1r_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -596,7 +596,7 @@
   <visual>
     <origin xyz="-0.007987 -0.213134 -1.06382" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l1l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l1l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -605,7 +605,7 @@
   <collision>
     <origin xyz="-0.007987 -0.213134 -1.06382" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l1l_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l1l_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -619,7 +619,7 @@
   <visual>
     <origin xyz="-0.007987 0.007366 -1.21382" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l1h_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l1h_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="chassis_material">
       <color rgba="0.75 0.75 0.75 1.0"/>
@@ -628,7 +628,7 @@
   <collision>
     <origin xyz="-0.007987 0.007366 -1.21382" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://bender_description/meshes/l1h_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://jaime_description/meshes/l1h_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
