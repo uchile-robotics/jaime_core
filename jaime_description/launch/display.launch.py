@@ -10,7 +10,7 @@ from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, Grou
 def generate_launch_description():
 
     # Package name
-    package_name='bender_description'
+    package_name='jaime_description'
 
     # Launch configurations
     rviz = LaunchConfiguration('rviz')
@@ -22,7 +22,7 @@ def generate_launch_description():
         description='Opens rviz is set to True')
 
     # Launch Robot State Publisher Node
-    urdf_path = os.path.join(get_package_share_directory(package_name),'urdf','bender.xacro')
+    urdf_path = os.path.join(get_package_share_directory(package_name),'urdf','jaime.xacro')
     
     # Launch configurations
     urdf = LaunchConfiguration('urdf')
