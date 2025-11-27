@@ -12,7 +12,7 @@ find_package(ament_cmake REQUIRED)
 # find_package(<dependency> REQUIRED)
 install(
   PROGRAMS
-  scripts/nav_test.py
+  scripts/movement_test.py
   DESTINATION lib/${PROJECT_NAME}
 )
 if(BUILD_TESTING)
