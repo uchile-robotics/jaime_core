@@ -18,9 +18,9 @@ def generate_launch_description(*args, **kwargs):
     kobuki_cmd = Node(
         package='kobuki_node',
         executable='kobuki_ros_node',
-        namespace=LaunchConfiguration('namespace'),
+        namespace='',
         output='screen',
-        parameters=[kobuki_params],
+        parameters=[parameters],
         remappings=[
             ('/commands/velocity', '/cmd_vel')
         ]
@@ -42,6 +42,5 @@ def generate_launch_description(*args, **kwargs):
     )
 
     ld.add_action(kobuki_cmd)
-    ld.add_action(tf_footprint2base_cmd)
 
     return ld
