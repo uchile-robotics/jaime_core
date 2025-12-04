@@ -26,6 +26,7 @@ class LaserFilter(Node):
         self._angle_min = None
         
     def _callback(self,msg):
+        val = msg
         self._angle_increment = msg.angle_increment
         filtered_fov_max, filtered_fov_min = self._filtered_fov
         range_index_max, range_index_min = (
@@ -34,8 +35,10 @@ class LaserFilter(Node):
         
         # self.get_logger().info(f'\n{range_index_max = }, \n{range_index_min = }')
         for i in range(range_index_min,range_index_max):
-           msg.ranges[i] = float('inf')
-        self._filtered_scan_pub.publish(msg)
+           val.ranges[i] = float('inf')
+        val.header.stamp = self.get_clock().now().to_msg()
+        val.header.frame_id = msg.header.frame_id
+        self._filtered_scan_pub.publish(val)
         
 def main(args=None):
     rclpy.init(args=args)
