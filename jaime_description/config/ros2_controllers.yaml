@@ -1,29 +1,55 @@
-# This config file is used by ros2_control
 controller_manager:
   ros__parameters:
     update_rate: 100  # Hz
 
-    manipulator_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+    joint_state_broadcaster: 
+      type: joint_state_broadcaster/JointStateBroadcaster 
+    
+    position_controller:
+      type: position_controllers/JointGroupPositionController
+
+    velocity_controller:
+      type: velocity_controllers/JointGroupVelocityController
 
 
-    joint_state_broadcaster:
-      type: joint_state_broadcaster/JointStateBroadcaster
-
-manipulator_controller:
+joint_state_broadcaster:
   ros__parameters:
+    type: joint_state_broadcaster/JointStateBroadcaster
     joints:
-      - l1l_to_base_link
-      - l2l_to_l1l
-      - l3l_to_l2l
-      - l4l_to_l3l
-      - l5l_to_l4l
-      - l6l_to_l5l
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
-      - velocity
-    allow_nonzero_velocity_at_trajectory_end: true
+      - l3_to_l2
+      - l4_to_l3
+      - l5_to_l4
+      - l6_to_l5
+      - l7_to_l6
+    publish_rate: 50
 
-#ver cuanto de esto se puede sacar
+position_controller:
+    ros__parameters:
+      joints:
+        - l3_to_l2
+        - l4_to_l3
+        - l5_to_l4
+        - l6_to_l5
+        - l7_to_l6
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
+        - velocity
+        - effort
+
+velocity_controller:
+    ros__parameters:
+      joints:
+        - l3_to_l2
+        - l4_to_l3
+        - l5_to_l4
+        - l6_to_l5
+        - l7_to_l6
+      command_interfaces:
+        - velocity
+      state_interfaces:
+        - position
+        - velocity
+        - effort
+

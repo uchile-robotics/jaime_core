@@ -67,9 +67,9 @@ def generate_launch_description():
         declare_urdf,
         declare_use_sim_time,
         robot_state_publisher,
-#        declare_rviz,
-#        rviz2,  
-#        joint_state_publisher_gui
+        declare_rviz,
+        rviz2,  
+        joint_state_publisher_gui
     ])
 
         

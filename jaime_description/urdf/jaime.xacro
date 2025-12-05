@@ -1,31 +1,292 @@
 <?xml version="1.0" ?>
 <robot name="jaime" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+<xacro:include filename="$(find jaime_description)/urdf/materials.xacro"/>
+<xacro:include filename="$(find jaime_description)/urdf/ros2_control.xacro"/>
 
 <link name="base_link">
-  <!--
   <inertial>
-    <origin xyz="0.007788124759933493 -0.007355769738403454 0.7107401090172263" rpy="0 0 0"/>
-    <mass value="8.572188299348024"/>
-    <inertia ixx="1.515422" iyy="1.498033" izz="0.132123" ixy="-0.0" iyz="5.1e-05" ixz="-0.001283"/>
+    <origin xyz="-0.017499522969446787 -1.0526493480826139e-16 0.17440208425323425" rpy="0 0 0"/>
+    <mass value="13.564884492489444"/>
+    <inertia ixx="0.603443" iyy="0.661344" izz="0.113873" ixy="0.0" iyz="-0.0" ixz="0.136948"/>
   </inertial>
-  -->
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://jaime_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find jaime_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="chassis_material">
-      <color rgba="0.75 0.75 0.75 1.0"/>
-    </material>
+    <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://jaime_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find jaime_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
+
+<link name="l1_1">
+  <inertial>
+    <origin xyz="0.018846974278423967 0.0 -0.03263220567459435" rpy="0 0 0"/>
+    <mass value="0.4182903755826701"/>
+    <inertia ixx="0.000256" iyy="0.00028" izz="0.000202" ixy="0.0" iyz="-0.0" ixz="4.7e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.219497 -0.0 -0.695365" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.219497 -0.0 -0.695365" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="l2_1">
+  <inertial>
+    <origin xyz="-0.05172955321662459 -0.025000000000000067 0.10972328501507367" rpy="0 0 0"/>
+    <mass value="2.9462310296804795"/>
+    <inertia ixx="0.005824" iyy="0.006877" izz="0.002764" ixy="0.0" iyz="0.0" ixz="0.001107"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.194491 -0.025 -0.652068" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.194491 -0.025 -0.652068" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="l3_1">
+  <inertial>
+    <origin xyz="-0.007044970296167463 -0.019999999999999987 0.048834569291703045" rpy="0 0 0"/>
+    <mass value="0.9850583257637644"/>
+    <inertia ixx="0.002085" iyy="0.001278" izz="0.000966" ixy="0.0" iyz="0.0" ixz="0.000165"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.25211 -0.02 -0.839201" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.25211 -0.02 -0.839201" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="l4_1">
+  <inertial>
+    <origin xyz="0.0591163741924281 -0.019999466003310276 0.07299545187488221" rpy="0 0 0"/>
+    <mass value="2.26906754439546"/>
+    <inertia ixx="0.004039" iyy="0.007589" izz="0.004999" ixy="-0.0" iyz="-0.0" ixz="-0.003125"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.2662 -0.02 -0.93687" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.2662 -0.02 -0.93687" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="l5_1">
+  <inertial>
+    <origin xyz="0.04436025539216232 -0.019999999999999088 0.021988793523559647" rpy="0 0 0"/>
+    <mass value="0.50434331505376"/>
+    <inertia ixx="0.000333" iyy="0.000466" izz="0.000633" ixy="0.0" iyz="-0.0" ixz="-0.000141"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.115381 -0.02 -1.079949" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.115381 -0.02 -1.079949" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="l6_1">
+  <inertial>
+    <origin xyz="0.09822806072614722 -0.02000000000000024 -0.00042655759258147796" rpy="0 0 0"/>
+    <mass value="1.5878361136644155"/>
+    <inertia ixx="0.000907" iyy="0.005126" izz="0.005257" ixy="-0.0" iyz="-0.0" ixz="0.000788"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.023636 -0.02 -1.116289" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.023636 -0.02 -1.116289" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="l7_1">
+  <inertial>
+    <origin xyz="0.049130716380135525 -0.02002073871139282 7.485311879884549e-06" rpy="0 0 0"/>
+    <mass value="2.601272341639274"/>
+    <inertia ixx="0.017542" iyy="0.005641" izz="0.012917" ixy="-3e-06" iyz="-0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.176695 -0.02 -1.086979" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l7_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.176695 -0.02 -1.086979" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find jaime_description)/meshes/l7_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="world">
+</link>
+
+<joint name="base_link_to_world" type="fixed">
+  <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  <parent link="world"/>
+  <child link="base_link"/>
+</joint>
+<joint name="l1_to_base_link" type="fixed">
+  <origin xyz="-0.219497 0.0 0.695365" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="l1_1"/>
+</joint>
+
+<joint name="l2_to_l1" type="fixed">
+  <origin xyz="0.025006 0.025 -0.043297" rpy="0 0.1 0"/>
+  <parent link="l1_1"/>
+  <child link="l2_1"/>
+</joint>
+
+<joint name="l3_to_l2" type="revolute">
+  <origin xyz="-0.057619 -0.005 0.187133" rpy="0 -0.2 0"/>
+  <parent link="l2_1"/>
+  <child link="l3_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit upper="1.0" lower="-0.5" effort="100" velocity="100"/>
+</joint>
+
+<joint name="l4_to_l3" type="revolute">
+  <origin xyz="-0.01409 0.0 0.097669" rpy="0 -0.5 0"/>
+  <parent link="l3_1"/>
+  <child link="l4_1"/>
+  <axis xyz="0.0 1.0 -0.0"/>
+  <limit upper="1.0" lower="-0.5" effort="100" velocity="100"/>
+</joint>
+
+<joint name="l5_to_l4" type="revolute">
+  <origin xyz="0.150819 0.0 0.143079" rpy="0 -0.2 0"/>
+  <parent link="l4_1"/>
+  <child link="l5_1"/>
+  <axis xyz="-0.0 1.0 -0.0"/>
+  <limit upper="1.0" lower="-0.5" effort="100" velocity="100"/>
+</joint>
+
+<joint name="l6_to_l5" type="revolute">
+  <origin xyz="0.091745 0.0 0.03634" rpy="0 -0.2 0"/>
+  <parent link="l5_1"/>
+  <child link="l6_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit upper="1.0" lower="-0.5" effort="100" velocity="100"/>
+</joint>
+
+<joint name="l7_to_l6" type="revolute">
+  <origin xyz="0.200331 0.0 -0.02931" rpy="0 1   0"/>
+  <parent link="l6_1"/>
+  <child link="l7_1"/>
+  <axis xyz="0.0 1.0 -0.0"/>
+  <limit upper="2.1" lower="-2.1" effort="100" velocity="100"/>
+</joint>
+
+
+<!-- tcp tablet -->
+
+<link name="tcp_tablet">
+
+  <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <sphere radius="0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <sphere radius="0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- tcp camara (TODO ajustar a pose real)-->
+
+<link name="tcp_front_camera">
+  <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <sphere radius="0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <sphere radius="0.001"/>
+    </geometry>
+  </collision>
+  
+</link>
+
+<!-- joint l7_to_l6 hacia tcp tablet -->
+<!-- ajustar desplazamiento en x real con cad -->
+
+<joint name="tablet_effector" type="fixed">
+  <parent link="l7_1"/>
+  <child link="tcp_tablet"/>
+  <origin xyz="0.055 0.0 0.0" rpy="0.0 0.0 0.0"/>
+</joint>
+
+
+<!-- joint de tcp tablet a tcp camera -->
+<!-- este se debe ajustar luego a la pose final de la camera -->
+<joint name="front_camera_effector" type="fixed">
+  <parent link="tcp_tablet"/>
+  <child link="tcp_front_camera"/>
+  <origin xyz="0.0 0.0 0.08" rpy="0.0 0.0 0.0"/>
+</joint>
+
 
 <link name="base_footprint"/>
 

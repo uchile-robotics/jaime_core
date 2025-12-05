@@ -12,6 +12,12 @@ def generate_launch_description():
     # Package name
     package_name='jaime_description'
 
+    # Launch configurations
+    rviz = LaunchConfiguration('rviz')
+    declare_rviz = DeclareLaunchArgument(
+        name='rviz', default_value='True',
+        description='Opens rviz is set to True')
+    
     world = LaunchConfiguration('world')
     # Path to default world 
     world_path = os.path.join(get_package_share_directory(package_name),'worlds', 'empty.world')
@@ -22,6 +28,12 @@ def generate_launch_description():
     
     # Default robot description if none is specified
     urdf_path = PathJoinSubstitution([get_package_share_directory(package_name), "urdf", "jaime.xacro"])
+    
+    controller_config = PathJoinSubstitution([
+        get_package_share_directory(package_name),
+        "config",
+        "ros2_controllers.yaml"
+    ])
     
     # Launch configurations
     urdf = LaunchConfiguration('urdf')
@@ -35,14 +47,7 @@ def generate_launch_description():
     declare_urdf = DeclareLaunchArgument(
             name='urdf', default_value=urdf_path,
             description='Path to the robot description file')
-
-    # Create a robot state publisher 
-    robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen',
-        parameters=[{'use_sim_time': use_sim_time,'robot_description': Command(['xacro ', urdf])}]
-    )
+    
     # Launch the gazebo server to initialize the simulation
     gazebo_server = IncludeLaunchDescription(
                     PythonLaunchDescriptionSource([os.path.join(
@@ -77,15 +82,64 @@ def generate_launch_description():
             f'config_file:={bridge_params}',]
     )
     
+
+    rviz_config_file = os.path.join(get_package_share_directory(package_name), 'rviz', 'rviz.rviz')
+    rviz2 = GroupAction(
+        condition=IfCondition(rviz),
+        actions=[Node(
+                    package='rviz2',
+                    executable='rviz2',
+                    arguments=['-d', rviz_config_file],
+                    output='screen',)]
+    )   
+
+    robot_description_content = Command(['xacro ', urdf])
+    robot_description = {'robot_description': robot_description_content}
+
+    robot_state_publisher = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        output='both',
+        parameters=[robot_description,
+        {"use_sim_time": True}]
+    )
+
+    controller_node = Node(
+        package='controller_manager',
+        executable='ros2_control_node',
+        parameters=[robot_description, controller_config, {'use_sim_time': use_sim_time},{'subscribe_to_robot_description': False},],
+        output='screen'
+    )
+
+    spawner_joint_state_broadcaster = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['joint_state_broadcaster', '--controller-manager-timeout', '50'],
+        output='screen'
+    )
+
+    spawner_position_controller = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['velocity_controller', '--controller-manager-timeout', '50'],
+        output='screen'
+    )
+
     # Launch them all!
     return LaunchDescription([
         # Declare launch arguments
         declare_world,
         declare_urdf,
+        declare_rviz,
+        rviz2,
         declare_use_sim_time,
         robot_state_publisher,
         gazebo_server,
         gazebo_client,
         ros_gz_bridge,
-        spawn
+        controller_node,
+        spawner_joint_state_broadcaster,
+        spawner_position_controller,
+        spawn,
+        
     ])
