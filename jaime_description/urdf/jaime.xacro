@@ -3,6 +3,9 @@
 
 <xacro:include filename="$(find jaime_description)/urdf/materials.xacro"/>
 <xacro:include filename="$(find jaime_description)/urdf/ros2_control.xacro"/>
+<xacro:include filename="$(find jaime_description)/urdf/kobuki_urdf.xacro"/>
+
+<xacro:kobuki namespace="kobuki_"/>
 
 <link name="base_link">
   <inertial>
@@ -172,6 +175,9 @@
   </collision>
 </link>
 
+
+<!-- inicio joints -->
+<!-- se conecto kobuki a base_link y todo lo demas se conecto a kobuki despues -->
 <link name="world">
 </link>
 
@@ -180,9 +186,16 @@
   <parent link="world"/>
   <child link="base_link"/>
 </joint>
+
+<joint name="world_to_base" type="fixed">
+  <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  <parent link="world"/>
+  <child link="base_link"/>
+  </joint>
+
 <joint name="l1_to_base_link" type="fixed">
   <origin xyz="-0.219497 0.0 0.695365" rpy="0 0 0"/>
-  <parent link="base_link"/>
+  <parent link="kobuki_base_link"/>
   <child link="l1_1"/>
 </joint>
 

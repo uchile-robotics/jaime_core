@@ -6,8 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /RobotModel1/Status1
-        - /TF1/Status1
       Splitter Ratio: 0.5
     Tree Height: 542
   - Class: rviz_common/Selection
@@ -67,151 +65,68 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        g1l_1:
+        l1_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        g1r_1:
+        l2_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        g2la_1:
+        l3_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        g2lb_1:
+        l4_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        g2ra_1:
+        l5_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        g2rb_1:
+        l6_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        l1h_1:
+        l7_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        l1l_1:
+        laser:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        tcp_front_camera:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        l1r_1:
+        tcp_tablet:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        l2h_1:
+        world:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        l2l_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        l2r_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        l3l_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        l3r_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        l4l_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        l4r_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        l5l_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        l5r_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        l6l_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        l6r_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        laser_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        real_sense_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tcp_l:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tcp_r:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wfl_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wfr_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wrl_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wrr_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Mass Properties:
         Inertia: false
         Mass: false
@@ -227,35 +142,31 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        base_footprint:
+          Value: true
         base_link:
           Value: true
-        g1l_1:
+        l1_1:
           Value: true
-        g1r_1:
+        l2_1:
           Value: true
-        l1h_1:
+        l3_1:
           Value: true
-        l2h_1:
+        l4_1:
           Value: true
-        l6l_1:
+        l5_1:
           Value: true
-        l6r_1:
+        l6_1:
           Value: true
-        laser_1:
+        l7_1:
           Value: true
-        real_sense_1:
+        laser:
           Value: true
-        tcp_l:
+        tcp_front_camera:
           Value: true
-        tcp_r:
+        tcp_tablet:
           Value: true
-        wfl_1:
-          Value: true
-        wfr_1:
-          Value: true
-        wrl_1:
-          Value: true
-        wrr_1:
+        world:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -263,21 +174,22 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        base_link:
-          l1h_1:
-            l2h_1:
-              real_sense_1:
-                {}
-          laser_1:
-            {}
-          wfl_1:
-            {}
-          wfr_1:
-            {}
-          wrl_1:
-            {}
-          wrr_1:
-            {}
+        world:
+          base_link:
+            base_footprint:
+              {}
+            l1_1:
+              l2_1:
+                l3_1:
+                  l4_1:
+                    l5_1:
+                      l6_1:
+                        l7_1:
+                          tcp_tablet:
+                            tcp_front_camera:
+                              {}
+            laser:
+              {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -341,10 +253,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.23039932548999786
+      Pitch: 0.2703997790813446
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 6.113578796386719
+      Yaw: 4.943558692932129
     Saved: ~
 Window Geometry:
   Displays:
@@ -363,4 +275,4 @@ Window Geometry:
     collapsed: false
   Width: 1200
   X: 66
-  Y: 60
+  Y: 252
