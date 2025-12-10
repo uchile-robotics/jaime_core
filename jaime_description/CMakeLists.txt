@@ -15,6 +15,10 @@ install(
   DIRECTORY launch urdf config rviz meshes worlds
   DESTINATION share/${PROJECT_NAME}
 )
+install(
+  DIRECTORY urdf launch rviz
+  DESTINATION share/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
