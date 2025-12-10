@@ -12,11 +12,7 @@
   <!-- Kobuki -->
   <xacro:macro name="kobuki" params = "namespace">
 
-    <joint name="${namespace}}base_joint" type="fixed">
-      <origin xyz="0 0 0.0102" rpy="0 0 0" />
-      <parent link="base_link"/>
-      <child link="${namespace}base_link" />
-    </joint>
+    
     <link name="${namespace}base_link">
       <visual>
         <geometry>
