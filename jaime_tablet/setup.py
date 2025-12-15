@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'camara_iriun'
+package_name = 'jaime_tablet'
 
 setup(
     name=package_name,
@@ -20,8 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-          'iriun_publisher = camara_iriun.iriun_publisher:main',
-          'media_sender = camara_iriun.media_sender:main',
+          'iriun_publisher = jaime_tablet.iriun_publisher:main',
+          'media_sender = jaime_tablet.media_sender:main',
         ],
     },
 )

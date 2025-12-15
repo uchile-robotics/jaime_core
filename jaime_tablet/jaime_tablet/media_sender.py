@@ -2,45 +2,75 @@
 #introduces la media en su formato adecuado y lo reproduce en la tablet conectada por usb (se debe activar el permiso en tablet al conectar por sub)
 #es importante conectar la tablet por usb, por lo que se debe activar y conectar con adb devices por pc y activar el usb tethering y los permisos en la tablet
 # al escribir adb devices en la terminal debería aparecer la tablet conectada
+
+
 import rclpy
 from rclpy.node import Node
 import subprocess
 import os
+import time
+
+ADB = "/usr/bin/adb"  # esto se obtiene escribiendo which adb en la terminal
 
 class MediaSenderNode(Node):
     def __init__(self):
         super().__init__('media_sender')
 
-        # selección de documento (video en formato mp4, fotos en formato jpg o giff)
-        #tener en cuenta que se va a abrir con google photos, por lo que se debe elegir el formato adecuado
-        
-        # aqui bse agrega el archivo
-        #video de ejemplo (un buen video)
-        self.local_path = "/home/robotica/FAUSTÃO_ Tá PEGANDO FOGO, bicho! (Domingão do Faustão).mp4"
+        # archivo por reproducir
+        self.local_path = "/home/robotica/Pato.gif"
+        # Ejemplo:
+        # "/home/robotica/video.mp4"
+        # "/home/robotica/imagen.jpg"
 
-        # Ruta destino en la tablet
-        self.tablet_path = "/sdcard/Download/media_from_pc.mp4"
+        if not os.path.isfile(self.local_path):
+            raise RuntimeError(f"No existe el archivo: {self.local_path}")
+
+        filename = os.path.basename(self.local_path)
+        self.tablet_path = f"/sdcard/Download/{filename}"
 
     def send_media(self):
-        self.get_logger().info("Copiando archivo a la tablet...")
+        self.get_logger().info("Enviando archivo a la tablet...")
 
-        # Enviar por ADB
+        # Copiar archivo a la tablet
+        subprocess.run(
+            [ADB, "push", self.local_path, self.tablet_path],
+            check=True
+        )
+
+        # 🔑 FORZAR INDEXACIÓN (para evitar problemas con apps)
+        subprocess.run(
+            [ADB, "shell", "am", "broadcast",
+             "-a", "android.intent.action.MEDIA_SCANNER_SCAN_FILE",
+             "-d", f"file://{self.tablet_path}"],
+            check=True
+        )
+
+        time.sleep(1)
+
+        self.get_logger().info("Abriendo archivo...")
+
+        self.open_with_system_viewer()
+
+    def open_with_system_viewer(self):
+        ext = self.local_path.lower()
+
+        # Decidir el tipo de archivo y su mime type
+        if ext.endswith(".gif"):
+            mime = "image/gif"
+        elif ext.endswith((".jpg", ".jpeg", ".png")):
+            mime = "image/*"
+        elif ext.endswith((".mp4", ".mkv", ".avi")):
+            mime = "video/*"
+        else:
+            mime = "*/*"  # Si el archivo no es reconocido, usar cualquier tipo
+
+        # Usar el intent para abrir con la app adecuada en Android
         subprocess.run([
-            "adb", "push", self.local_path, self.tablet_path
-        ], check=True)
-
-        self.get_logger().info("Archivo copiado. Abriendo en la tablet...")
-
-        # Lanzar el intent para abrir el archivo
-        subprocess.run([
-            "adb", "shell", "am", "start",
+            ADB, "shell", "am", "start",
             "-a", "android.intent.action.VIEW",
             "-d", f"file://{self.tablet_path}",
-            "-t", "video/mp4"
+            "-t", mime
         ], check=True)
-
-        self.get_logger().info("Listo. Archivo enviado y abierto en la tablet.")
-
 
 def main(args=None):
     rclpy.init(args=args)
