@@ -9,6 +9,7 @@ from rclpy.node import Node
 import subprocess
 import os
 import time
+from std_msgs.msg import String
 
 ADB = "/usr/bin/adb"  # esto se obtiene escribiendo which adb en la terminal
 
@@ -27,6 +28,17 @@ class MediaSenderNode(Node):
 
         filename = os.path.basename(self.local_path)
         self.tablet_path = f"/sdcard/Download/{filename}"
+        
+        self.subscription = self.create_subscription(
+            String,
+            '/path',
+            self.listener_callback,
+            10)
+
+    def listener_callback(self, msg):
+        self.local_path = msg.data
+        print(self.local_path)
+        self.send_media() #reescribe
 
     def send_media(self):
         self.get_logger().info("Enviando archivo a la tablet...")
@@ -76,10 +88,21 @@ def main(args=None):
     rclpy.init(args=args)
 
     node = MediaSenderNode()
-    node.send_media()
+    try:
+        # 🌟 Esto es lo que faltaba 🌟
+        # rclpy.spin() mantiene el nodo en ejecución, procesando callbacks 
+        # (como self.listener_callback) de manera constante.
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        # Permite detener el nodo con Ctrl+C
+        pass
+    finally:
+        # Limpieza y apagado
+        node.destroy_node()
+        rclpy.shutdown()
+    
 
-    node.destroy_node()
-    rclpy.shutdown()
+    
 
 
 if __name__ == "__main__":

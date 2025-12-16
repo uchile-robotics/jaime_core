@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+          'file_publisher = jaime_tablet.file_publisher:main',
           'iriun_publisher = jaime_tablet.iriun_publisher:main',
           'media_sender = jaime_tablet.media_sender:main',
         ],
