@@ -2,46 +2,70 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 import sys
+import subprocess
+import time
 
-class FilePublisherNode(Node):
+class MasterPublisher(Node):
     def __init__(self, file_path):
-        super().__init__('file_publisher')
+        super().__init__('master_publisher')
+        self.file_path = file_path
         
-        # 🔔 Crear el publisher en el mismo tópico que el MediaSenderNode
+        # 1. LANZAR EL RECEPTOR AUTOMÁTICAMENTE
+        # Esto abre el 'media_sender' en segundo plano sin que tengas que abrir otra terminal
+        self.get_logger().info('Iniciando el nodo receptor (media_sender) en segundo plano...')
+        try:
+            # Reemplaza 'mi_paquete' por el nombre real de tu paquete
+            self.process = subprocess.Popen(
+                ['ros2', 'run', 'jaime_tablet', 'media_sender'],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE
+            )
+        except Exception as e:
+            self.get_logger().error(f'No se pudo iniciar media_sender: {e}')
+            return
+
+        # 2. Configurar el Publicador
         self.publisher_ = self.create_publisher(String, '/path', 10)
         
-        # 📌 Crear un mensaje String con la ruta que deseas enviar
-        msg = String()
-        msg.data = file_path
+        # 3. Esperar a que el sistema ROS 2 se estabilice
+        self.get_logger().info('Esperando 3 segundos a que el receptor esté listo...')
+        time.sleep(3.0)
         
-        # 📤 Publicar el mensaje
-        self.publisher_.publish(msg)
-        self.get_logger().info(f'Publicando la ruta: "{msg.data}" en el tópico /path')
-        
-        # 🛑 Detener el nodo después de publicar un solo mensaje
-        self.timer_ = self.create_timer(1.0, self.timer_callback)
+        self.publish_and_exit()
 
-    def timer_callback(self):
-        # Usamos un timer para apagar el nodo después de que se publique el mensaje.
-        # Esto asegura que el mensaje se envíe antes de que el nodo termine.
-        self.get_logger().info('Publicación completada. Terminando nodo.')
-        self.timer_.cancel()
-        rclpy.shutdown()
+    def publish_and_exit(self):
+        msg = String()
+        msg.data = self.file_path
+        
+        # Publicamos varias veces para asegurar que el receptor recién abierto lo capture
+        for i in range(3):
+            self.publisher_.publish(msg)
+            self.get_logger().info(f'Enviando archivo ({i+1}/3): {msg.data}')
+            time.sleep(0.5)
+            
+        self.get_logger().info('✅ Proceso completado. El archivo debería estar reproduciéndose.')
+        self.get_logger().info('Nota: El receptor seguirá corriendo en segundo plano.')
+        
+        # Terminamos el proceso del publicador
+        raise SystemExit
 
 def main(args=None):
-    # 📝 Verificamos que el usuario proporcione la ruta del archivo como argumento
     if len(sys.argv) < 2:
-        print("Uso: ros2 run <paquete> file_publisher <ruta_del_archivo>")
-        sys.exit(1)
+        print("Uso: python3 file_publisher.py /ruta/al/video.mp4")
+        return
         
-    file_path = sys.argv[1] # El primer argumento después del nombre del script es la ruta
+    file_path = sys.argv[1]
     
     rclpy.init(args=args)
-    node = FilePublisherNode(file_path)
-    # rclpy.spin() no es estrictamente necesario aquí si solo publicamos y terminamos,
-    # pero usamos un timer para un cierre limpio.
-    rclpy.spin(node) 
-    # El shutdown se llama dentro del timer_callback para el cierre.
+    node = MasterPublisher(file_path)
+    
+    try:
+        rclpy.spin(node)
+    except (KeyboardInterrupt, SystemExit):
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
