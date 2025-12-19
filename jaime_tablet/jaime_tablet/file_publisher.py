@@ -1,3 +1,8 @@
+#este script utiliza el media_sender y un archivo de tu elleción para reproducirlo en la tablet
+#el formato a usar en terminal (luego de construit y bash) es ros2 run jaime_tablet file_publisher tu archivo
+#ej: ros2 run jaime_tablet file_publisher /home/robotica/ganso.gif
+#la dirección del archivo debe ser desde el computador (solo para asegurarse de que funcione bien )
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -43,7 +48,7 @@ class MasterPublisher(Node):
             self.get_logger().info(f'Enviando archivo ({i+1}/3): {msg.data}')
             time.sleep(0.5)
             
-        self.get_logger().info('✅ Proceso completado. El archivo debería estar reproduciéndose.')
+        self.get_logger().info('Proceso completado. El archivo debería estar reproduciéndose.')
         self.get_logger().info('Nota: El receptor seguirá corriendo en segundo plano.')
         
         # Terminamos el proceso del publicador
