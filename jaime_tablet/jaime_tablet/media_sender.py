@@ -59,3 +59,19 @@ class MediaSenderNode(Node):
         except subprocess.CalledProcessError as e:
             error_msg = e.stderr.decode()
             self.get_logger().error(f' Error de ADB: {error_msg}')
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = MediaSenderNode()
+
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
