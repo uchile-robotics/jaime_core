@@ -13,7 +13,7 @@
   <xacro:macro name="kobuki" params = "namespace">
 
     
-    <link name="${namespace}base_link">
+    <link name="${namespace}base_link"> #ver si se puede subir desde aca
       <visual>
         <geometry>
           <!-- new mesh -->

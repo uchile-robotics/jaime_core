@@ -179,6 +179,7 @@
 </link>
 
 <link name="odom"/>
+<!-- ver porque estan los dos de nuevo-->
 
 <!-- inicio joints -->
 <!-- se conecto kobuki a base_link y todo lo demas se conecto a kobuki despues -->
@@ -196,7 +197,7 @@
 </joint>
 
 <joint name="kobuki_base_joint" type="fixed">
-  <origin xyz="0 0 -0.1" rpy="0 0 0" />
+  <origin xyz="0 0 0.1" rpy="0 0 0" />
   <parent link="base_link"/>
   <child link="kobuki_base_link" />
 </joint>
