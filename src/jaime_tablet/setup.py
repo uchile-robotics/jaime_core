@@ -10,10 +10,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', [
-            'launch/tablet_launch.py',
-            'launch/iriun_pub.launch.py',
-            'launch/launch_iriun.py'
+        ('share/' + package_name, [
+            'launch/tablet_launch.py'
         ]),
         ('share/' + package_name + '/imagenes', [
             'imagenes/funciona.gif',
@@ -33,9 +31,9 @@ setup(
     license='Apache-2.0',
     entry_points={
         'console_scripts': [
-            'iriun_publisher = jaime_tablet.iriun_publisher:main',
             'media_sender = jaime_tablet.media_sender:main',
             'file_publisher = jaime_tablet.file_publisher:main',
+            'android_cam = jaime_tablet.android_cam:main',
         ],
     },
 )

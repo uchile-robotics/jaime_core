@@ -15,10 +15,10 @@ def generate_launch_description():
     #package jaime_tablet
     tablet_pkg = FindPackageShare('jaime_tablet')
 
-    iriun_node = Node(
+    android_cam_node = Node(
         package='jaime_tablet',
-        executable='iriun_publisher',
-        output='screen',
+        executable='android_cam',
+        output='screen'
     )
 
     media_sender_node = Node(
@@ -42,7 +42,7 @@ def generate_launch_description():
 
 
     return LaunchDescription([
-        iriun_node,
+        android_cam_node,
         media_sender_node,
         file_publisher_node,
     ])
