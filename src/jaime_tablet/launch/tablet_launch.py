@@ -1,6 +1,7 @@
 #la idea es que inicie la camara y el envio de imagenes
 #funciona iriun_node
 #funciona media_sender_node
+#se debe activar IP webcam en la tablet primero
 
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, TimerAction

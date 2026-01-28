@@ -5,7 +5,7 @@ import numpy as np
 import imutils
 
 # Replace the below URL with your own. Make sure to add "/shot.jpg" at last.
-url = "http://192.168.1.134:8080/shot.jpg"
+url = "http://192.168.1.133:8080/shot.jpg"
 
 # While loop to continuously fetching data from the Url
 while True:

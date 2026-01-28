@@ -1,3 +1,5 @@
+#hay que iniciar la app ip webcam en la tablet primero (start server)
+#revisar que el link en la tablet sea el mismo que sale aca
 import rclpy
 import cv2
 import subprocess
@@ -14,7 +16,7 @@ class AndroidCam(Node):
     def __init__(self):
         super().__init__('android_cam')
 
-        self.declare_parameter('url','http://192.168.1.134:8080/shot.jpg')
+        self.declare_parameter('url','http://192.168.1.133:8080/shot.jpg')
         self.declare_parameter('width', 1000)
         self.declare_parameter('height',1800)
         self.declare_parameter('fps', 30.0)
