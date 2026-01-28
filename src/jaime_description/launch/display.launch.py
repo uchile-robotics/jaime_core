@@ -6,6 +6,8 @@ from ament_index_python.packages import get_package_share_directory
 from launch.substitutions import LaunchConfiguration, PythonExpression, Command
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
+from launch_ros.parameter_descriptions import ParameterValue
+
 
 def generate_launch_description():
 
@@ -37,13 +39,22 @@ def generate_launch_description():
             name='urdf', default_value=urdf_path,
             description='Path to the robot description file')
 
-    # Create a robot state publisher 
+    # Create a robot state publisher
+
     robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
-        parameters=[{'use_sim_time': use_sim_time,'robot_description': Command(['xacro ', urdf])}]
+        parameters=[{
+            'use_sim_time': use_sim_time,
+            'robot_description': ParameterValue(
+                Command(['xacro ', urdf]),
+                value_type=str
+            )
+        }]
     )
+
+    
     rviz_config_file = os.path.join(get_package_share_directory(package_name), 'rviz', 'rviz.rviz')
     rviz2 = GroupAction(
         condition=IfCondition(rviz),
