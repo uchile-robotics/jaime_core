@@ -35,7 +35,7 @@ def generate_launch_description():
             'path': PathJoinSubstitution([
                 tablet_pkg,
                 'imagenes',
-                'funciona.gif'
+                'pato.gif'
             ])
         }],
         output='screen'

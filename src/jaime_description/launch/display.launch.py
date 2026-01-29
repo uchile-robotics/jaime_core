@@ -20,7 +20,7 @@ def generate_launch_description():
     # Path to default world 
     # Launch Arguments
     declare_rviz = DeclareLaunchArgument(
-        name='rviz', default_value='false',
+        name='rviz', default_value='true',
         description='Opens rviz is set to True')
 
     # Launch Robot State Publisher Node

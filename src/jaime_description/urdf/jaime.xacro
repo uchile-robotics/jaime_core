@@ -175,16 +175,16 @@
   </collision>
 </link>
 
-<link name="world">
+<!-- <link name="world">
 </link>
 
-<link name="odom"/>
+<link name="odom"/> -->
 <!-- ver porque estan los dos de nuevo-->
 
 <!-- inicio joints -->
 <!-- se conecto kobuki a base_link y todo lo demas se conecto a kobuki despues -->
 
-<joint name="world_to_odom" type="fixed">
+<!-- <joint name="world_to_odom" type="fixed">
   <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
   <parent link="world"/>
   <child link="odom"/>
@@ -195,7 +195,7 @@
   <origin xyz= "0.0 0.0 0.0" rpy="0 0 0"/>
   <parent link="odom"/>
   <child link="base_link"/>
-</joint>
+</joint> -->
 
 <joint name="kobuki_base_joint" type="fixed">
   <origin xyz="0 0 -0.1" rpy="0 0 0" />
