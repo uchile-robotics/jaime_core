@@ -20,7 +20,7 @@ def generate_launch_description():
     # Path to default world 
     # Launch Arguments
     declare_rviz = DeclareLaunchArgument(
-        name='rviz', default_value='True',
+        name='rviz', default_value='false',
         description='Opens rviz is set to True')
 
     # Launch Robot State Publisher Node
@@ -48,7 +48,7 @@ def generate_launch_description():
         parameters=[{
             'use_sim_time': use_sim_time,
             'robot_description': ParameterValue(
-                Command(['xacro ', urdf]),
+                Command(['xacro', ' ', urdf]),
                 value_type=str
             )
         }]
@@ -68,19 +68,23 @@ def generate_launch_description():
 
 
     joint_state_publisher_gui = Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        output='screen',
-    )
+            package='joint_state_publisher_gui',
+            executable='joint_state_publisher_gui',
+            output='screen',
+        )
+    
+
+
 
     # Launch them all!
     return LaunchDescription([
-        declare_urdf,
-        declare_use_sim_time,
-        robot_state_publisher,
         declare_rviz,
-        rviz2,  
-        joint_state_publisher_gui
+        declare_use_sim_time,
+        declare_urdf,
+        rviz2,
+        joint_state_publisher_gui,
+        robot_state_publisher,
+
     ])
 
         

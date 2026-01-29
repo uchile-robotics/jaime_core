@@ -192,12 +192,13 @@
 
 
 <joint name="odom_to_base_link" type="floating"> 
+  <origin xyz= "0.0 0.0 0.0" rpy="0 0 0"/>
   <parent link="odom"/>
   <child link="base_link"/>
 </joint>
 
 <joint name="kobuki_base_joint" type="fixed">
-  <origin xyz="0 0 0.1" rpy="0 0 0" />
+  <origin xyz="0 0 -0.1" rpy="0 0 0" />
   <parent link="base_link"/>
   <child link="kobuki_base_link" />
 </joint>
