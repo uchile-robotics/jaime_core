@@ -1,6 +1,7 @@
 #la idea es que inicie la camara y el envio de imagenes
-#funciona iriun_node
+#funciona file_publisher
 #funciona media_sender_node
+#funciona android_cam
 #se debe activar IP webcam en la tablet primero
 
 from launch import LaunchDescription
